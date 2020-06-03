@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Toolbox.Cryptography
 {
-    public class RSAEncryption
+    public class RSAEncryption : IRSAEncryption
     {
         private readonly RSACryptoServiceProvider _rsaCryptoServiceProvider;
         private readonly UnicodeEncoding _unicodeEncoding;

@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DAL_Billeterie.Repositories;
+using DAL_Billeterie.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -10,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Toolbox.Cryptography;
 
 namespace API_Billeterie
 {
@@ -26,7 +29,9 @@ namespace API_Billeterie
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddSingleton<IRSAEncryption, RSAEncryption>(x => new RSAEncryption(1024));
             services.AddSingleton<IConfiguration>(Configuration);
+            services.AddSingleton<IUser, UserService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
