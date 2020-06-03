@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>ProjectBilleterie</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{54a51ba5-223c-44e5-b04c-64557f2a1859}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql130DatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>ProjectBilleterie</RootNamespace>
+    <AssemblyName>ProjectBilleterie</AssemblyName>
+    <ModelCollation>1033, CI</ModelCollation>
+    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <!-- Default to the v11.0 targets path if the targets file for the current VS version is not found -->
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">11.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Condition="'$(SQLDBExtensionsRefPath)' != ''" Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="Tools" />
+    <Folder Include="User" />
+    <Folder Include="Country" />
+    <Folder Include="Artist" />
+    <Folder Include="Location" />
+    <Folder Include="Event" />
+    <Folder Include="Comment" />
+    <Folder Include="Ticket" />
+    <Folder Include="Booking" />
+    <Folder Include="Booking_Ticket" />
+    <Folder Include="User\Stored Procedures" />
+    <Folder Include="User\Views" />
+    <Folder Include="User\Trigger" />
+    <Folder Include="Country\Stored Procedures" />
+    <Folder Include="Artist\Stored Procedures" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="Tools\Salt.sql" />
+    <Build Include="User\User.sql" />
+    <Build Include="Country\Country.sql" />
+    <Build Include="Artist\Artist.sql" />
+    <Build Include="Location\Location.sql" />
+    <Build Include="Event\Event.sql" />
+    <Build Include="Comment\Comment.sql" />
+    <Build Include="Ticket\Ticket.sql" />
+    <Build Include="Booking\Booking.sql" />
+    <Build Include="Booking_Ticket\Booking_Ticket.sql" />
+    <Build Include="User\Views\UserSafeView.sql" />
+    <Build Include="User\Stored Procedures\AddUser.sql" />
+    <Build Include="User\Stored Procedures\LoginUser.sql" />
+    <Build Include="User\Stored Procedures\DeleteUser.sql" />
+    <Build Include="User\Trigger\OnDelete.sql" />
+    <Build Include="User\Stored Procedures\GetOneUser.sql" />
+    <Build Include="User\Stored Procedures\GetAllUser.sql" />
+    <Build Include="User\Stored Procedures\UpdateUser.sql" />
+    <Build Include="User\Stored Procedures\UpdatePassword.sql" />
+    <Build Include="User\Stored Procedures\AddAddress.sql" />
+    <Build Include="User\Stored Procedures\AddCard.sql" />
+    <Build Include="Country\Stored Procedures\GetAllCountries.sql" />
+    <Build Include="Artist\Stored Procedures\AddArtist.sql" />
+    <Build Include="Artist\Stored Procedures\GetAllArtist.sql" />
+    <Build Include="Artist\Stored Procedures\GetArtistNames.sql" />
+    <Build Include="Artist\Stored Procedures\GetOneArtist.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ProjectBilleterie.publish.xml" />
+    <None Include="RefreshDB.publish.xml" />
+  </ItemGroup>
+</Project>
