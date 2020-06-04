@@ -8,7 +8,6 @@ namespace DAL_Billeterie.Repositories
     {
         List<TEntity> GetAll();
         TEntity GetOne(int id);
-        void Create(TEntity t);
         void Delete(int id);
         void Update(TEntity t);
     }

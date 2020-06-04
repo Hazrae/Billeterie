@@ -8,13 +8,17 @@ using Billeterie_Web.ViewModel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Models;
+using Vereyon.Web;
+using Models.Errors;
+using Models.User;
+using Toolbox.Cryptography;
 
 namespace Billeterie_Web.Controllers
 {
     public class UserController : BaseController
     {
-        public UserController(IAPIConsume apiConsume) : base(apiConsume)
+        private IRSAEncryption _encrypt;
+        public UserController(IAPIConsume apiConsume, IFlashMessage flash) : base(apiConsume, flash)
         {
 
         }
@@ -46,10 +50,42 @@ namespace Billeterie_Web.Controllers
         public ActionResult Create(UserForm u)
         {
             try
-            {   
-                // TODO: Add insert logic here
+            {
+                if (ModelState.IsValid)
+                {
+                    RegisterUser ru = new RegisterUser();
+                    ru.Login = u.Login;
+                    ru.Mail = u.Mail;
+                    ru.BirthDate = u.BirthDate;
 
-                return RedirectToAction(nameof(Index));
+                    int country;
+                    Int32.TryParse(u.SelectedCountry, out country);
+                    ru.Country = country;
+
+                    byte[] pwEncrypt;
+                    _encrypt = new RSAEncryption(ConsumeInstance.Get<byte[]>("Auth"));
+                    pwEncrypt = _encrypt.Encrypt(u.Password);
+                    ru.Password = Convert.ToBase64String(pwEncrypt);
+
+                    UserResponse ur = ConsumeInstance.PostWithReturn<RegisterUser, UserResponse >("User", ru);
+                    if (ur.ErrorCode == 1)
+                    {
+                        FlashMessage.Warning("Email already in use");
+                        return RedirectToAction("Create");
+                    }
+                    else if (ur.ErrorCode == 2)
+                    {
+                        FlashMessage.Warning("Login already in use");
+                        return RedirectToAction("Create");
+                    }
+                    else
+                        FlashMessage.Confirmation("Account created");
+                    return RedirectToAction("Login");
+                }
+                else
+                {
+                    return View(u);
+                }    
             }
             catch
             {
