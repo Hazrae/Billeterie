@@ -2,11 +2,12 @@
 	@id int,
 	@mail nvarchar(50),
 	@login nvarchar(25),	
-	@birthDate Date
+	@birthDate datetime2,
+	@country int
 
 AS
 BEGIN
 	UPDATE [User] 
-	SET Mail = @mail, [Login] = @login, BirthDate = @birthDate
+	SET Mail = @mail, [Login] = @login, BirthDate = @birthDate, FK_Country = @country
 	WHERE UserID = @id
 END

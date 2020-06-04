@@ -1,7 +1,7 @@
 ﻿CREATE TABLE [dbo].[Event]
 (
 	EventID int identity primary key,
-	[Date] date not null,
+	[Date] DATETIME2 not null,
 	FK_Location int not null,
 	FK_Artist int not null
 

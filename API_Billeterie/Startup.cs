@@ -32,6 +32,7 @@ namespace API_Billeterie
             services.AddSingleton<IRSAEncryption, RSAEncryption>(x => new RSAEncryption(1024));
             services.AddSingleton<IConfiguration>(Configuration);
             services.AddSingleton<IUser, UserService>();
+            services.AddSingleton<ICountry, CountryService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

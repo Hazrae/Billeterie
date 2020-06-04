@@ -92,7 +92,6 @@
     <Build Include="User\Stored Procedures\GetAllUser.sql" />
     <Build Include="User\Stored Procedures\UpdateUser.sql" />
     <Build Include="User\Stored Procedures\UpdatePassword.sql" />
-    <Build Include="User\Stored Procedures\AddAddress.sql" />
     <Build Include="User\Stored Procedures\AddCard.sql" />
     <Build Include="Country\Stored Procedures\GetAllCountries.sql" />
     <Build Include="Artist\Stored Procedures\AddArtist.sql" />

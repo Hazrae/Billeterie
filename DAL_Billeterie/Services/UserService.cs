@@ -52,10 +52,5 @@ namespace DAL_Billeterie.Services
         {
             throw new NotImplementedException();
         }
-
-        public void AddAddress(UserAddress ua)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

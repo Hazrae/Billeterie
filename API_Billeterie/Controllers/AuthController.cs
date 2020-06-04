@@ -14,8 +14,7 @@ namespace API_Billeterie.Controllers
     public class AuthController : BaseController
     {
         public AuthController(IRSAEncryption encrypt, IUser userService) : base(encrypt, userService) { }
-
-        [Route("GetKey")]
+     
         public byte[] GetKey()
         {
 

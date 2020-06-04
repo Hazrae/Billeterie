@@ -1,6 +1,6 @@
 ﻿CREATE PROCEDURE [dbo].[AddCard]
 	@num bigint,
-	@valid date,
+	@valid datetime2,
 	@code nvarchar(255),
 	@id int
 AS

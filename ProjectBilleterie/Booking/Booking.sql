@@ -1,7 +1,7 @@
 ﻿CREATE TABLE [dbo].[Booking]
 (
 	BookingID int identity primary key,
-	[Date] date,
+	[Date] DATETIME2,
 	FK_User int not null,
 	FK_Event int not null
 

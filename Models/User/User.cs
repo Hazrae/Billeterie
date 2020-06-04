@@ -13,10 +13,6 @@ namespace Models.User
         public DateTime BirthDate { get; set; }
         public Boolean IsAdmin { get; set; }
         public Boolean IsActive { get; set; }
-        public int Address_Num { get; set; }
-        public string Address_Street { get; set; }
-        public string Address_City { get; set; }
-        public int Address_ZIP { get; set; }
         public string Country { get; set; }
         public long CB_Num { get; set; }
         public DateTime CB_Valid { get; set; }
