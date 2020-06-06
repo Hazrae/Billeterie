@@ -12,28 +12,14 @@ using Vereyon.Web;
 using Models.Errors;
 using Models.User;
 using Toolbox.Cryptography;
+using Billeterie_Web.Infrastructure;
 
 namespace Billeterie_Web.Controllers
 {
     public class UserController : BaseController
     {
         private IRSAEncryption _encrypt;
-        public UserController(IAPIConsume apiConsume, IFlashMessage flash) : base(apiConsume, flash)
-        {
-
-        }
-
-        // GET: User
-        public ActionResult Index()
-        {
-            return View();
-        }
-
-        // GET: User/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
+        public UserController(IAPIConsume apiConsume, IFlashMessage flash, ISessionManager session) : base(apiConsume, flash, session) {}
 
         // GET: User/Create
         public ActionResult Create()
@@ -92,6 +78,8 @@ namespace Billeterie_Web.Controllers
                 return View();
             }
         }
+
+
 
         // GET: User/Edit/5
         public ActionResult Edit(int id)
