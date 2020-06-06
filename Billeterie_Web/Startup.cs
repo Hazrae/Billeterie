@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Billeterie_Web.Infrastructure;
 using Billeterie_Web.Utils;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -31,6 +32,19 @@ namespace Billeterie_Web
             services.AddSingleton<Uri>(new Uri("https://localhost:5001/api/"));
             services.AddSingleton<IAPIConsume, APIConsume>();
             services.AddTransient<IFlashMessage, FlashMessage>();
+
+            #region Ajout des services pour les Sessions
+            services.AddDistributedMemoryCache();
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromDays(3);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
+            #endregion
+
+            services.AddHttpContextAccessor();
+            services.AddTransient<ISessionManager, SessionManager>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,6 +64,8 @@ namespace Billeterie_Web
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseSession();
 
             app.UseAuthorization();
 
