@@ -9,6 +9,7 @@ using Vereyon.Web;
 
 namespace Billeterie_Web.Controllers
 {
+    [LoggedIn]
     public class BaseController : Controller
     {
         protected internal IAPIConsume ConsumeInstance { get; set; }
