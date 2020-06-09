@@ -57,6 +57,15 @@ namespace API_Billeterie.Controllers
             return new UserResponse();
         }
 
+        [HttpPost]
+        [Route("Login")]
+        public User Login(LoginUser u)
+        {
+            string pwDecrypt = _encrypt.Decrypt(Convert.FromBase64String(u.Password));
+            u.Password = pwDecrypt;
+            return _userService.Login(u);
+        }
+
         // PUT: api/User/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)

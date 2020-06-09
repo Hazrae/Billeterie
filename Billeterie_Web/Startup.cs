@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Billeterie_Web.Infrastructure;
 using Billeterie_Web.Utils;
+using Billeterie_Web.Utils.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -31,6 +32,7 @@ namespace Billeterie_Web
 
             services.AddSingleton<Uri>(new Uri("https://localhost:5001/api/"));
             services.AddSingleton<IAPIConsume, APIConsume>();
+            services.AddSingleton<IGoogleToken, GoogleToken>();
             services.AddTransient<IFlashMessage, FlashMessage>();
 
             #region Ajout des services pour les Sessions

@@ -49,7 +49,40 @@ namespace DAL_Billeterie.Services
 
         public User Login(LoginUser lu)
         {
-            throw new NotImplementedException();
+
+            //Log an user in through his credentials
+            using (SqlConnection connec = new SqlConnection(StringConnec))
+            {
+
+                using (SqlCommand cmd = new SqlCommand("LoginUser", connec))
+                {
+
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("Login", lu.Login);
+                    cmd.Parameters.AddWithValue("Password", lu.Password);
+
+                    connec.Open();
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+
+                        if (dr.Read())
+                        {
+                            return new User
+                            {
+                                UserID = (int)dr["UserID"],
+                                Mail = dr["Mail"].ToString(),
+                                Login = dr["Login"].ToString(),
+                                BirthDate = (DateTime)dr["BirthDate"],
+                                IsActive = (bool)dr["IsActive"],                               
+                                IsAdmin = (bool)dr["IsAdmin"]
+                            };
+                        }
+                        else
+                            return new User();
+                    }
+                }
+            }
         }
 
         public List<User> GetAll()

@@ -13,15 +13,27 @@ using Models.Errors;
 using Models.User;
 using Toolbox.Cryptography;
 using Billeterie_Web.Infrastructure;
+using Billeterie_Web.Utils.Interfaces;
+using Microsoft.Extensions.Configuration;
+using MailKit.Security;
+using MimeKit;
+using MailKit.Net.Smtp;
 
 namespace Billeterie_Web.Controllers
 {
     public class UserController : BaseController
     {
         private IRSAEncryption _encrypt;
-        public UserController(IAPIConsume apiConsume, IFlashMessage flash, ISessionManager session) : base(apiConsume, flash, session) {}
+        private IGoogleToken _googleToken;
+        private IConfiguration _config;
+        public UserController(IAPIConsume apiConsume, IFlashMessage flash, ISessionManager session, IGoogleToken googleToken, IConfiguration config) : base(apiConsume, flash, session) 
+        {
+            _googleToken = googleToken;
+            _config = config;
+        }
 
         // GET: User/Create
+        [AnonymousRequired]
         public ActionResult Create()
         {
             UserForm user = new UserForm();
@@ -31,6 +43,7 @@ namespace Billeterie_Web.Controllers
         }
 
         // POST: User/Create
+        [AnonymousRequired]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(UserForm u)
@@ -80,6 +93,100 @@ namespace Billeterie_Web.Controllers
         }
 
 
+        [AnonymousRequired]
+        // GET: User/Create
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        // POST: User/Create
+        [AnonymousRequired]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Login(UserLoginForm ul)
+        {
+            try
+            {
+
+                if (ModelState.IsValid)
+                {                  
+                    _encrypt = new RSAEncryption(ConsumeInstance.Get<byte[]>("Auth"));               
+                    LoginUser lu = new LoginUser();
+                    lu.Login = ul.Login;
+                    byte[] pwEncrypt = _encrypt.Encrypt(ul.Password);
+                    lu.Password = Convert.ToBase64String(pwEncrypt);
+
+                    User u = ConsumeInstance.PostWithReturn<LoginUser, User>("User/Login", lu);
+
+                    if (u.Login != lu.Login)
+                    {
+                        FlashMessage.Warning("This account doesn't exists");
+                        return View(ul);
+                    }
+                    else if (u.IsActive == false)
+                    {
+                        FlashMessage.Warning("Your account has been deactivate, Please contact the admin");
+                        return RedirectToAction("Contact");
+                    }
+                    else
+                    {
+                        SessionManager.Id = u.UserID;
+                        SessionManager.Login = u.Login;                    
+                        FlashMessage.Confirmation("Welcome " + u.Login);
+                        return RedirectToAction("Index", "Home");
+                    }
+                }
+                else
+                {
+                    return View(ul);
+                }
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        public IActionResult Contact()
+        {
+            return View();
+        }
+
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public IActionResult Contact(Contact contact)
+        {
+            SaslMechanismOAuth2 oauth2 = _googleToken.Token().Result;
+            MimeMessage message = new MimeMessage();
+            message.From.Add(new MailboxAddress("Contact", "from.website@example.com"));
+            message.To.Add(new MailboxAddress("Me",_config.GetValue<string>("Google:Mail")));
+            message.Subject = $"[Contact from your website] { contact.Subject }";
+
+            BodyBuilder builder = new BodyBuilder
+            {
+                HtmlBody = $"<div><span style='font-weight: bold'>De</span> : {contact.Name} </div>" +
+                           $"<div><span style='font-weight: bold'>Mail</span> : {contact.Email}</div>" +
+                           $"<div style='margin-top: 30px'>{contact.Message}</div>"
+            };
+
+            message.Body = builder.ToMessageBody();
+
+            using (var client = new SmtpClient())
+            {
+                client.Connect("smtp.gmail.com", 587);
+
+                // use the OAuth2.0 access token obtained above          
+                client.Authenticate(oauth2);
+
+                client.Send(message);
+                client.Disconnect(true);
+                FlashMessage.Confirmation("Mail sent with success");
+                ModelState.Clear();
+                return View();
+            }
+        }
+
 
         // GET: User/Edit/5
         public ActionResult Edit(int id)
@@ -104,27 +211,12 @@ namespace Billeterie_Web.Controllers
             }
         }
 
-        // GET: User/Delete/5
-        public ActionResult Delete(int id)
+        [AuthRequired]
+        public ActionResult Logout()
         {
-            return View();
+            SessionManager.Abandon();
+            return RedirectToAction("Index", "Home");
         }
-
-        // POST: User/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+       
     }
 }

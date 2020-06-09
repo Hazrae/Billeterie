@@ -6,14 +6,17 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Billeterie_Web.Models;
+using Billeterie_Web.Utils;
+using Vereyon.Web;
+using Billeterie_Web.Infrastructure;
 
 namespace Billeterie_Web.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IAPIConsume apiConsume, IFlashMessage flash, ISessionManager session) : base(apiConsume, flash, session)
         {
             _logger = logger;
         }
