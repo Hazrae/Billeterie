@@ -92,7 +92,32 @@ namespace DAL_Billeterie.Services
 
         public User GetOne(int id)
         {
-            throw new NotImplementedException();
+            // Get a specific user through his ID
+            using (SqlConnection connec = new SqlConnection(StringConnec))
+            {
+
+                using (SqlCommand cmd = new SqlCommand("GetOne", connec))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("id", id);
+                    //execution
+                    connec.Open();
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        dr.Read();
+                        return new User
+                        {
+                            UserID = (int)dr["UserID"],
+                            Mail = dr["Mail"].ToString(),
+                            Login = dr["Login"].ToString(),
+                            BirthDate = (DateTime)dr["BirthDate"],
+                            IsActive = (bool)dr["IsActive"],                          
+                            IsAdmin = (bool)dr["IsAdmin"],
+                            Country = (int)dr["FK_Country"]
+                        }; ;
+                    }
+                }
+            }
         }
 
         public int UpdatePassword(UserPassword up)

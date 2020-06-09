@@ -27,9 +27,11 @@ namespace DAL_Billeterie.Services
                     {
                         while (dr.Read())
                         {
-                            SelectListItem item = new SelectListItem();
-                            item.Text = dr["Name"].ToString();
-                            item.Value = dr["CountryID"].ToString();
+                            SelectListItem item = new SelectListItem
+                            {
+                                Text = dr["Name"].ToString(),
+                                Value = dr["CountryID"].ToString()
+                            };
                             list.Add(item);
                         }
                     }

@@ -7,6 +7,7 @@ using DAL_Billeterie.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Models.Errors;
+using Models.User.Mapper;
 using Models.User;
 using Toolbox.Cryptography;
 
@@ -26,9 +27,9 @@ namespace API_Billeterie.Controllers
 
         // GET: api/User/5
         [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
+        public EditUser Get(int id)
         {
-            return "value";
+            return _userService.GetOne(id).ToLocal();
         }
 
         // POST: api/User

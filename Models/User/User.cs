@@ -13,7 +13,7 @@ namespace Models.User
         public DateTime BirthDate { get; set; }
         public Boolean IsAdmin { get; set; }
         public Boolean IsActive { get; set; }
-        public string Country { get; set; }
+        public int Country { get; set; }
         public long CB_Num { get; set; }
         public DateTime CB_Valid { get; set; }
         public int CB_Code { get; set; }

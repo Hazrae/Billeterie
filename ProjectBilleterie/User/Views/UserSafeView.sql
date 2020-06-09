@@ -1,2 +1,2 @@
 ﻿CREATE VIEW [dbo].[UserSafeView]
-	AS SELECT UserID, [Login], Mail, BirthDate, IsAdmin FROM [User]
+	AS SELECT UserID, [Login], Mail, BirthDate, IsAdmin, IsActive,FK_Country FROM [User]

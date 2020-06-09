@@ -188,10 +188,17 @@ namespace Billeterie_Web.Controllers
         }
 
 
-        // GET: User/Edit/5
-        public ActionResult Edit(int id)
+        // GET: User/Edit
+        public ActionResult Edit()
         {
-            return View();
+            EditUser u = ConsumeInstance.Get<EditUser>("User/", SessionManager.Id);
+            UserEditForm ue = new UserEditForm();
+            ue.Login = u.Login;
+            ue.Mail = u.Mail;
+            ue.BirthDate = u.BirthDate;
+            ue.SelectedCountry = u.SelectedCountry;
+            ue.Countries = ConsumeInstance.Get<List<SelectListItem>>("Country");
+            return View(ue);
         }
 
         // POST: User/Edit/5
