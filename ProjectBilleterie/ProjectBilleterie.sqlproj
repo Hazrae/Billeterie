@@ -102,5 +102,6 @@
   <ItemGroup>
     <None Include="ProjectBilleterie.publish.xml" />
     <None Include="RefreshDB.publish.xml" />
+    <None Include="Tools\DBFiller.sql" />
   </ItemGroup>
 </Project>
