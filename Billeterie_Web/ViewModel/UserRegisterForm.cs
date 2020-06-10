@@ -1,14 +1,16 @@
-﻿using Billeterie_Web.ValidationAttributes;
+﻿using Billeterie_Web.Utils;
+using Billeterie_Web.ValidationAttributes;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 
 namespace Billeterie_Web.ViewModel
 {
-    public class UserForm
+    public class UserRegisterForm
     {
         [Required]
         public string Login { get; set; }
@@ -40,5 +42,10 @@ namespace Billeterie_Web.ViewModel
         [Display(Name = "Country")]
         public string SelectedCountry { get; set; }
         public List<SelectListItem> Countries { get; set; }
+        public UserRegisterForm()
+        {
+            APIConsume consume = new APIConsume(new Uri("https://localhost:5001/api/"));
+            Countries = consume.Get<List<SelectListItem>>("Country");
+        }
     }
 }

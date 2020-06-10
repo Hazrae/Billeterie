@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Models.Errors;
+using Models.User;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -9,6 +11,6 @@ namespace DAL_Billeterie.Repositories
         List<TEntity> GetAll();
         TEntity GetOne(int id);
         void Delete(int id);
-        void Update(TEntity t);
+        void Update(int id, EditUser t);
     }
 }

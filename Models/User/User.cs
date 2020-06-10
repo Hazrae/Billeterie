@@ -19,4 +19,5 @@ namespace Models.User
         public int CB_Code { get; set; }
 
     }
+
 }

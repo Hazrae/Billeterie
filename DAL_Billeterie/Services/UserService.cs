@@ -42,9 +42,27 @@ namespace DAL_Billeterie.Services
             throw new NotImplementedException();
         }
 
-        public void Update(User u)
+        public void Update(int id, EditUser u)
         {
-            throw new NotImplementedException();
+            //Update User details
+            using (SqlConnection connec = new SqlConnection(StringConnec))
+            {
+
+                using (SqlCommand cmd = new SqlCommand("UpdateUser", connec))
+                {
+
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("id", id);
+                    cmd.Parameters.AddWithValue("mail", u.Mail);
+                    cmd.Parameters.AddWithValue("login", u.Login);
+                    cmd.Parameters.AddWithValue("birthDate", u.BirthDate);
+                    cmd.Parameters.AddWithValue("country", u.SelectedCountry);
+
+                    connec.Open();
+                    cmd.ExecuteNonQuery();
+                }
+            }
         }
 
         public User Login(LoginUser lu)
@@ -120,9 +138,29 @@ namespace DAL_Billeterie.Services
             }
         }
 
-        public int UpdatePassword(UserPassword up)
+        public int UpdatePassword(int id, UserPassword u)
         {
-            throw new NotImplementedException();
+            using (SqlConnection connec = new SqlConnection(StringConnec))
+            {
+
+                using (SqlCommand cmd = new SqlCommand("UpdatePassword", connec))
+                {
+
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("id", id);
+                    cmd.Parameters.AddWithValue("oldpassword", u.OldPassword);
+                    cmd.Parameters.AddWithValue("password", u.Password);
+
+                    SqlParameter returnValue = new SqlParameter();
+                    returnValue.Direction = ParameterDirection.ReturnValue;
+                    cmd.Parameters.Add(returnValue);
+
+                    connec.Open();
+                    cmd.ExecuteNonQuery();
+                    return (int)returnValue.Value;
+                }
+            }
         }
 
         public void AddCard(UserCard uc)

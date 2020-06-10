@@ -7,7 +7,7 @@ namespace DAL_Billeterie.Repositories
     {    
         void AddCard(UserCard uc);
         User Login(LoginUser lu);
-        int UpdatePassword(UserPassword up);
+        int UpdatePassword(int id,UserPassword up);
         void Create(RegisterUser ru);
     }
 }

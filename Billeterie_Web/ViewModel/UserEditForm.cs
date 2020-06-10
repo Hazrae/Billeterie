@@ -1,5 +1,7 @@
-﻿using Billeterie_Web.ValidationAttributes;
+﻿using Billeterie_Web.Utils;
+using Billeterie_Web.ValidationAttributes;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Org.BouncyCastle.Security;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -27,5 +29,10 @@ namespace Billeterie_Web.ViewModel
         [Display(Name = "Country")]
         public int SelectedCountry { get; set; }
         public List<SelectListItem> Countries { get; set; }
+        public UserEditForm()
+        {
+            APIConsume consume = new APIConsume(new Uri("https://localhost:5001/api/"));
+            Countries = consume.Get<List<SelectListItem>>("Country");
+        }
     }
 }

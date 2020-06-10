@@ -36,9 +36,8 @@ namespace Billeterie_Web.Controllers
         [AnonymousRequired]
         public ActionResult Create()
         {
-            UserForm user = new UserForm();
-            user.BirthDate = new DateTime(1977, 7, 7);
-            user.Countries = ConsumeInstance.Get<List<SelectListItem>>("Country");
+            UserRegisterForm user = new UserRegisterForm();
+            user.BirthDate = new DateTime(1977, 7, 7);        
             return View(user);
         }
 
@@ -46,7 +45,7 @@ namespace Billeterie_Web.Controllers
         [AnonymousRequired]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(UserForm u)
+        public ActionResult Create(UserRegisterForm u)
         {
             try
             {
@@ -121,7 +120,7 @@ namespace Billeterie_Web.Controllers
 
                     if (u.Login != lu.Login)
                     {
-                        FlashMessage.Warning("This account doesn't exists");
+                        FlashMessage.Warning("Those credentials didn't match an existing user account");
                         return View(ul);
                     }
                     else if (u.IsActive == false)
@@ -187,7 +186,7 @@ namespace Billeterie_Web.Controllers
             }
         }
 
-
+        [AuthRequired]
         // GET: User/Edit
         public ActionResult Edit()
         {
@@ -196,21 +195,94 @@ namespace Billeterie_Web.Controllers
             ue.Login = u.Login;
             ue.Mail = u.Mail;
             ue.BirthDate = u.BirthDate;
-            ue.SelectedCountry = u.SelectedCountry;
-            ue.Countries = ConsumeInstance.Get<List<SelectListItem>>("Country");
+            ue.SelectedCountry = u.SelectedCountry;      
             return View(ue);
         }
 
         // POST: User/Edit/5
+        [AuthRequired]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(UserEditForm user)
         {
             try
             {
-                // TODO: Add update logic here
+                if (ModelState.IsValid)
+                {
+                    EditUser eu = new EditUser
+                    {
+                        Login = user.Login,
+                        Mail = user.Mail,
+                        SelectedCountry = user.SelectedCountry,
+                        BirthDate = user.BirthDate
+                    };
+                    UserResponse ur = ConsumeInstance.PutWithReturn<EditUser, UserResponse>("User/" + SessionManager.Id, eu);
+                    if (ur.ErrorCode == 1)
+                    {
+                        FlashMessage.Warning("Email already in use");                  
+                        return View(user);
+                    }
+                    else if (ur.ErrorCode == 2)
+                    {
+                        FlashMessage.Warning("Login already in use");                  
+                        return View(user);
+                    }
+                    else
+                        SessionManager.Login = user.Login;
+                    FlashMessage.Confirmation("Profile updated with success");                
+                    return View(user);
+                }
+                else
+                {                
+                    return View(user);
+                }
+            }
+            catch
+            {
+                return View();
+            }
+        }
 
-                return RedirectToAction(nameof(Index));
+        // GET: User/Edit/5
+        [AuthRequired]
+        public ActionResult EditPw()
+        {
+            return View();
+        }
+
+        // POST: User/Edit/5
+        [AuthRequired]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditPw(EditPasswordForm user)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    byte[] pwEncrypt;
+                    UserPassword up = new UserPassword();
+                    _encrypt = new RSAEncryption(ConsumeInstance.Get<byte[]>("Auth"));
+                    pwEncrypt = _encrypt.Encrypt(user.Password);
+                    up.Password = Convert.ToBase64String(pwEncrypt);
+                    pwEncrypt = _encrypt.Encrypt(user.OldPassword);
+                    up.OldPassword = Convert.ToBase64String(pwEncrypt);
+
+                    UserResponse ur = ConsumeInstance.PutWithReturn<UserPassword, UserResponse>("User/ChangePw/" + SessionManager.Id, up);
+                    if (ur.ErrorCode == 3)
+                    {
+                        FlashMessage.Warning("The old password doesn't match");
+                        return View(user);
+                    }
+                    else
+                        FlashMessage.Confirmation("Password Changed, Please reconnect");
+                    SessionManager.Abandon();
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    return View(user);
+                }
             }
             catch
             {

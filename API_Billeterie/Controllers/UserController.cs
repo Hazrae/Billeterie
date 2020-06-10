@@ -69,14 +69,43 @@ namespace API_Billeterie.Controllers
 
         // PUT: api/User/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public UserResponse Put(int id, [FromBody] EditUser u)
         {
+            try
+            {
+                _userService.Update(id, u); ;
+            }
+            catch (SqlException e)
+            {
+                switch (e.Number)
+                {
+                    case 2627:
+                        {
+                            if (e.Message.Contains("mail"))
+                                return new UserResponse { ErrorCode = 1 };
+                            else
+                                return new UserResponse { ErrorCode = 2 };
+                        }
+                }
+            }
+            return new UserResponse();
         }
 
-        // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        // PUT: api/User/PutPw/5
+        [HttpPut]
+        [Route("ChangePw/{id}")]
+        public UserResponse ChangePw(int id, UserPassword u)
         {
+            string pwDecrypt = _encrypt.Decrypt(Convert.FromBase64String(u.Password));
+            u.Password = pwDecrypt;
+            pwDecrypt = _encrypt.Decrypt(Convert.FromBase64String(u.OldPassword));
+            u.OldPassword = pwDecrypt;
+
+            int state = _userService.UpdatePassword(id, u); ;
+            if (state == 1)
+                return new UserResponse { ErrorCode = 3 };
+            else
+                return new UserResponse();
         }
     }
 }
