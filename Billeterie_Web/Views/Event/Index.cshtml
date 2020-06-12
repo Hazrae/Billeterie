@@ -21,18 +21,15 @@
         <div class="row" style=" margin: 1px;padding: 1px;height: 350px;">
             <div class="col-md-4" style="width:450px;"> <img src=@item.ArtistPhoto></div>
             <div class="col-md-4" style="width:150px; text-align:center;">@item.LocationName<br /><br />@item.DateEvent</div>
-            <div class="col-md-4" style="width:150px;"><button class="btn btn-primary">Details</button><br /><br /><button class="btn btn-primary">Booking</button></div>
+            <div class="col-md-4" style="width:150px;"><button class="btn btn-primary">Booking</button></div>
         </div>
 
     }
 
 
 
-    @{
-        int prev = Model.offset - 3;
-        int next = Model.offset + 3;
-
+    @{      
         if (Model.offset != 0)
-        {<span> @Html.ActionLink("Previous", "Index", new { offset = prev })&nbsp;|&nbsp;</span>}<span> @Html.ActionLink("Next", "Index", new { offset = next })</span>
+        {<span> @Html.ActionLink("Previous", "Index", new { offset = Model.offset - 3 })&nbsp;|&nbsp;</span>}<span> @Html.ActionLink("Next", "Index", new { offset = Model.offset + 3 })</span>
     }
 </div>

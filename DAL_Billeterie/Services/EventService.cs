@@ -49,8 +49,10 @@ namespace DAL_Billeterie.Services
                                 EventID = (int)dr["EventID"],
                                 EventName = dr["Name"].ToString(),
                                 DateEvent = (DateTime)dr["Date"],
+                                ArtistID = (int)dr["ArtistID"],
                                 ArtistName = dr["artist"].ToString(),
                                 ArtistPhoto = dr["Photo"].ToString(),
+                                LocationID = (int)dr["LocationID"],
                                 LocationName = dr["location"].ToString()
                             });                            
                         }

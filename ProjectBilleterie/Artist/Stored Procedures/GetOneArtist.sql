@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[GetPhoto]
-	@name nvarchar(255)
+﻿CREATE PROCEDURE [dbo].[GetOneArtist]
+	@id int
 AS
-	SELECT * FROM Artist WHERE [Name] = @name
+	SELECT * FROM Artist WHERE ArtistID = @id;
