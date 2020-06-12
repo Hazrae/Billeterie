@@ -27,14 +27,14 @@ values
 ('cat 3',17,3),
 ('cat 3',18,4)
 
-insert into [Event]([Date],FK_Location,FK_Artist)
+insert into [Event]([Date],[Name],FK_Location,FK_Artist)
 values
-('2020-10-10',1,1),
-('2020-2-20',2,2),
-('2020-10-20',1,2),
-('2020-10-21',3,3),
-('2022-1-20',3,4),
-('2021-10-20',4,4)
+('2020-10-10','Event génial',1,1),
+('2020-2-20','Encore un event génial',2,2),
+('2020-10-20','Concert génial',1,2),
+('2020-10-21','Festival génial',3,3),
+('2022-1-20','Guinguette géniale',3,4),
+('2021-10-20','Event pas top',4,4)
 
 insert into Country ([Name])
 values
@@ -49,23 +49,23 @@ values
 
 insert into [User] ([Login],[Password],Mail,BirthDate,FK_Country,IsActive,IsAdmin)
 values
-('test',HASHBYTES('SHA2_512',dbo.Salt() +'test'),'test@test.com','10/10/1980',3,1,0),
-('test1',HASHBYTES('SHA2_512',dbo.Salt() +'test1'),'test1@test.com','18/10/1980',3,1,0),
-('test2',HASHBYTES('SHA2_512',dbo.Salt() +'test2'),'test2@test.com','08/10/1980',2,0,0),
-('Hazrae',HASHBYTES('SHA2_512',dbo.Salt() +'Hazrae'),'kevinvoneche@gmail.com','10/11/1988',2,1,1)
+('test',HASHBYTES('SHA2_512',dbo.Salt() +'test'),'test@test.com','1980-10-10',3,1,0),
+('test1',HASHBYTES('SHA2_512',dbo.Salt() +'test1'),'test1@test.com','1980-10-18',3,1,0),
+('test2',HASHBYTES('SHA2_512',dbo.Salt() +'test2'),'test2@test.com','1980-10-8',2,0,0),
+('Hazrae',HASHBYTES('SHA2_512',dbo.Salt() +'Hazrae'),'kevinvoneche@gmail.com','1988-11-10',2,1,1)
 
 insert into Comment ([Text], [Date],FK_User,FK_Event)
 values
-('j''adore les saucisses lentilles!', '2020-6-10',4,10),
-('j''adore les poireaux!', '2020-06-9',2,11),
-('j''adore les pâtes!', '2020-4-10',3,15)
+('j''adore les saucisses lentilles!', '2020-6-10',4,1),
+('j''adore les poireaux!', '2020-06-9',2,2),
+('j''adore les pâtes!', '2020-4-10',3,5)
 
 insert into Booking ([Date], FK_User, FK_Event)
 values
-('10/06/2020',5,10),
-('10/04/2020',2,11),
-('10/06/2020',3,12),
-('10/06/2020',4,15)
+('2020-6-10',1,1),
+('2020-6-4',2,2),
+('2020-10-10',3,3),
+('2020-6-15',4,4)
 
 insert into BookingTicket(Qty,FK_Ticket,FK_Booking)
 values

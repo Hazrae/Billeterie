@@ -71,6 +71,7 @@
     <Folder Include="User\Trigger" />
     <Folder Include="Country\Stored Procedures" />
     <Folder Include="Artist\Stored Procedures" />
+    <Folder Include="Event\Stored Procedures" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tools\Salt.sql" />
@@ -98,6 +99,7 @@
     <Build Include="Artist\Stored Procedures\GetAllArtist.sql" />
     <Build Include="Artist\Stored Procedures\GetArtistNames.sql" />
     <Build Include="Artist\Stored Procedures\GetOneArtist.sql" />
+    <Build Include="Event\Stored Procedures\GetEventsBy3.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ProjectBilleterie.publish.xml" />

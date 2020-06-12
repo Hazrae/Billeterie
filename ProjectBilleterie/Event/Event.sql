@@ -2,6 +2,7 @@
 (
 	EventID int identity primary key,
 	[Date] DATETIME2 not null,
+	[Name] varchar(255) not null,
 	FK_Location int not null,
 	FK_Artist int not null
 
