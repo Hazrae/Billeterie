@@ -4,37 +4,35 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Event List</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.list)
-        {
-            <tr>
-                <td>
-                    <div>@item.EventName.</div>
-                </td>
-                <td>
-                    <div>@item.LocationName</div>
-                </td>
-                <td>
-                    <div>@item.DateEvent</div>
-                </td>      
-            </tr>
-        }
-    </tbody>
-</table>
-       @{ 
-           int prev = Model.offset - 3;
-           int next = Model.offset + 3;
+<br />
+<br />
+<br />
 
-           if (Model.offset != 0) {<span> @Html.ActionLink("Previous", "Index", new { offset = prev })&nbsp;|&nbsp;</span>}<span> @Html.ActionLink("Next", "Index", new { offset = next })</span>
-        }
+<div class="container">
+    @foreach (var item in Model.list)
+    {
+        <div>
+            <div class="row" style="text-align:center;margin-bottom:2px; border:1px solid black"></div>
+            <div class="col-md-12" style="font-weight:bold;font-size:22px">@item.EventName</div>
+        </div>
+        <br />
+        <div class="row" style=" margin: 1px;padding: 1px;height: 350px;">
+            <div class="col-md-4" style="width:450px;"> <img src=@item.ArtistPhoto></div>
+            <div class="col-md-4" style="width:150px; text-align:center;">@item.LocationName<br /><br />@item.DateEvent</div>
+            <div class="col-md-4" style="width:150px;"><button class="btn btn-primary">Details</button><br /><br /><button class="btn btn-primary">Booking</button></div>
+        </div>
+
+    }
+
+
+
+    @{
+        int prev = Model.offset - 3;
+        int next = Model.offset + 3;
+
+        if (Model.offset != 0)
+        {<span> @Html.ActionLink("Previous", "Index", new { offset = prev })&nbsp;|&nbsp;</span>}<span> @Html.ActionLink("Next", "Index", new { offset = next })</span>
+    }
+</div>
