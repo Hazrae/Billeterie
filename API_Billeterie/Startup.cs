@@ -31,7 +31,8 @@ namespace API_Billeterie
             services.AddControllers();
             services.AddSingleton<IRSAEncryption, RSAEncryption>(x => new RSAEncryption(1024));
             services.AddSingleton<IConfiguration>(Configuration);
-            services.AddSingleton<IUser, UserService>();
+            services.AddSingleton<IEvent, EventService>();
+            services.AddSingleton<IUser, UserService>();          
             services.AddSingleton<ICountry, CountryService>();
         }
 

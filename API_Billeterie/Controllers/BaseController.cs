@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using DAL_Billeterie.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.Operations;
 using Toolbox.Cryptography;
 
 namespace API_Billeterie.Controllers
@@ -15,10 +16,17 @@ namespace API_Billeterie.Controllers
     {
         protected IRSAEncryption _encrypt;
         protected IUser _userService;
+        protected IEvent _eventService;
         public BaseController(IRSAEncryption encrypt, IUser userService)
         {
             _encrypt = encrypt;
             _userService = userService;
+        }
+
+        public BaseController(IRSAEncryption encrypt, IEvent eventService)
+        {
+            _encrypt = encrypt;
+            _eventService = eventService;
         }
     }
 }

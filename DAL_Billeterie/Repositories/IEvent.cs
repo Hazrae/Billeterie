@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DAL_Billeterie.Repositories
 {
-    interface IEvent : IRepository<Event>
+    public interface IEvent : IRepository<Event>
     {
         List<Event> GetBy3(int offset);
     }

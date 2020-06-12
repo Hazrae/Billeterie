@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[GetEventsBy5]
+﻿CREATE PROCEDURE [dbo].[GetEventsBy3]
 	@offset int
 	
 AS

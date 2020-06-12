@@ -12,7 +12,7 @@ namespace DAL_Billeterie.Services
 {
     public class EventService : Service, IEvent
     {
-        protected EventService(IConfiguration config) : base(config)
+        public EventService(IConfiguration config) : base(config)
         {
         }
 
