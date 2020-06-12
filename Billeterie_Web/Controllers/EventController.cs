@@ -21,11 +21,11 @@ namespace Billeterie_Web.Controllers
         {
             //get 3 events par rapport à l'offset
             //les process et affichage dans ma vue
-            // pagination +5 offset
+            // pagination +3 offset
 
-            IEnumerable<Event> list  = ConsumeInstance.Get<IEnumerable<Event>>("Event/", offset);                    
+            Eventby3 listEvent = new Eventby3(ConsumeInstance, (offset < 0)?0:offset);                 
 
-             return View(list);
+             return View(listEvent);
         }
     }
 }

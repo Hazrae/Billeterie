@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Models.Event.Event>
+﻿@model Billeterie_Web.ViewModel.Eventby3;
 
 @{
     ViewData["Title"] = "Index";
@@ -16,23 +16,25 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                <div>@item.EventName.</div>
-            </td>
-            <td>
-                <div>@item.LocationName</div>
-            </td>
-            <td>
-                <div>@item.DateEvent</div>
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.list)
+        {
+            <tr>
+                <td>
+                    <div>@item.EventName.</div>
+                </td>
+                <td>
+                    <div>@item.LocationName</div>
+                </td>
+                <td>
+                    <div>@item.DateEvent</div>
+                </td>      
+            </tr>
+        }
     </tbody>
 </table>
+       @{ 
+           int prev = Model.offset - 3;
+           int next = Model.offset + 3;
+
+           if (Model.offset != 0) {<span> @Html.ActionLink("Previous", "Index", new { offset = prev })&nbsp;|&nbsp;</span>}<span> @Html.ActionLink("Next", "Index", new { offset = next })</span>
+        }
