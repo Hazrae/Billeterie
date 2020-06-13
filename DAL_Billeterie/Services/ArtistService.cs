@@ -13,7 +13,7 @@ namespace DAL_Billeterie.Services
 {
     public class ArtistService : Service, IArtist
     {
-        protected ArtistService(IConfiguration config) : base(config)
+        public ArtistService(IConfiguration config) : base(config)
         {
         }
 
@@ -33,7 +33,7 @@ namespace DAL_Billeterie.Services
             using (SqlConnection connec = new SqlConnection(StringConnec))
             {
 
-                using (SqlCommand cmd = new SqlCommand("GetOneArtist", connec))
+                using (SqlCommand cmd = new SqlCommand("GetEventsByArtist", connec))
                 {                    
                     Artist artist = new Artist();
                     cmd.CommandType = CommandType.StoredProcedure;
@@ -44,33 +44,21 @@ namespace DAL_Billeterie.Services
                     {
                         if (dr.Read())
                         {
-                            artist.ArtistID = (int)dr["ArtistID"];
+                            artist.ArtistID = id;
                             artist.ArtistName = dr["Name"].ToString();
                             artist.ArtistPhoto = dr["Photo"].ToString();
                             artist.ArtistDesc = dr["Desc"].ToString();
-
-                            using (SqlCommand cmd1 = new SqlCommand("GetEventsByArtist", connec))
-                            {                               
-                                cmd.CommandType = CommandType.StoredProcedure;
-                                cmd.Parameters.AddWithValue("id", id);
-                                //execution
-                                connec.Open();
-                                using (SqlDataReader dr1 = cmd.ExecuteReader())
+                            do
+                            {
+                                artist.ListEvent.Add(new EventArtist
                                 {
-                                    while (dr.Read())
-                                    {
-                                        artist.ListEvent.Add(new EventArtist
-                                        {
-                                            EventID = (int)dr["EventID"],
-                                            EventName = dr["Name"].ToString(),
-                                            EventDate = (DateTime)dr["Date"],
-                                            LocationID = (int)dr["LocationID"],
-                                            LocationName = dr["location"].ToString()
-                                        });
-                                    }
-                                }
-                                return artist;
-                            }
+                                    EventID = (int)dr["EventID"],
+                                    EventName = dr["event"].ToString(),
+                                    EventDate = (DateTime)dr["Date"],
+                                    LocationID = (int)dr["LocationID"],
+                                    LocationName = dr["location"].ToString()
+                                });
+                            }while ((dr.Read()));                                                      
                         }
                     }
                     return artist;

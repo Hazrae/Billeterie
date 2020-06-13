@@ -7,6 +7,11 @@ namespace Models.Artist
 {
     public class Artist
     {
+        public Artist()
+        {
+            ListEvent = new List<EventArtist>();
+        }
+
         public int ArtistID { get; set; }
         public string ArtistName { get; set; }
         public string ArtistDesc { get; set; }
