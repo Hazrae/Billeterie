@@ -18,12 +18,12 @@ namespace API_Billeterie.Controllers
         {
         }
 
-        //// GET: api/Artist
-        //[HttpGet]
-        //public IEnumerable<string> Get()
-        //{
-        //    return new string[] { "value1", "value2" };
-        //}
+        // GET: api/Artist
+        [HttpGet]
+        public List<ArtistWall> Get()
+        {
+            return _artistService.GetWall();
+        }
 
         // GET: api/Artist/5
         [HttpGet("{id}")]

@@ -22,6 +22,34 @@ namespace DAL_Billeterie.Services
             throw new NotImplementedException();
         }
 
+        public List<ArtistWall> GetWall()
+        {
+            // Get Artists for the Artist wall
+            using (SqlConnection connec = new SqlConnection(StringConnec))
+            {
+
+                using (SqlCommand cmd = new SqlCommand("GetAllArtist", connec))
+                {
+                    List<ArtistWall> list = new List<ArtistWall>();
+                    cmd.CommandType = CommandType.StoredProcedure;                 
+                    //execution
+                    connec.Open();
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        while(dr.Read())
+                        {
+                            list.Add(new ArtistWall {
+                                ArtistID = (int)dr["ArtistID"],
+                                ArtistName = dr["Name"].ToString(),
+                                ArtistPhoto = dr["Photo"].ToString()
+                            });                                             
+                        }
+                    }
+                    return list;
+                }
+            }
+        }
+
         public List<Artist> GetAll()
         {
             throw new NotImplementedException();

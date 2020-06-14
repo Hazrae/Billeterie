@@ -23,5 +23,12 @@ namespace Billeterie_Web.Controllers
             avm = ConsumeInstance.Get<ArtistViewModel>("Artist/", id);
             return View(avm);
         }
+
+        public IActionResult Wall()
+        {
+            List<ArtistWallViewModel> list = new List<ArtistWallViewModel>();
+            list = ConsumeInstance.Get<List<ArtistWallViewModel>>("Artist");
+            return View(list);
+        }
     }
 }

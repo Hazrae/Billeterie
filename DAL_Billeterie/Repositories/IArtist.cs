@@ -9,5 +9,6 @@ namespace DAL_Billeterie.Repositories
     public interface IArtist : IRepository<Artist>
     {
         Artist GetArtist(int id);
+        List<ArtistWall> GetWall();
     }
 }

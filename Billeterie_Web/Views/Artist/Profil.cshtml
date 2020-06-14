@@ -15,11 +15,11 @@
             </div>
             @foreach (var item in Model.ListEvent)
             {
-                <div class="row" style="border-bottom:1px solid #822b2b !important">
-                    <div class="col-md-3">@item.EventName</div>
-                    <div class="col-md-3">@item.EventDate.ToString("dd/MM/yyy")</div>
-                    <div class="col-md-3">@item.LocationName</div>
-                    <div class="col-md-3" style="text-align:center"><button class="btn btn-primary">Booking</button></div>
+                <div class="row">
+                    <div class="col-md-3" style="border-bottom: 1px solid #822b2b;">@item.EventName</div>
+                    <div class="col-md-3" style="border-bottom: 1px solid #822b2b;">@item.EventDate.ToString("dd/MM/yyy")</div>
+                    <div class="col-md-3" style="border-bottom: 1px solid #822b2b;">@item.LocationName</div>
+                    <div class="col-md-3"><button class="btn btn-primary">Booking</button></div>
 
                 </div>
             }

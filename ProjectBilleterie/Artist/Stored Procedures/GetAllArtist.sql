@@ -1,3 +1,3 @@
 ﻿CREATE PROCEDURE [dbo].[GetAllArtist]
 AS
-	SELECT * From Artist
+	SELECT Artist.ArtistID, Artist.[Name], Artist.Photo From Artist
