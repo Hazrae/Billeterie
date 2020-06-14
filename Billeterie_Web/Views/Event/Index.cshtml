@@ -19,16 +19,25 @@
         </div>
         <br />
         <div class="row" style=" margin: 1px;padding: 1px;height: 350px;">
-            <div class="col-md-4" style="width:450px;"> <img src=@item.ArtistPhoto></div>
-            <div class="col-md-4" style="width:150px; text-align:center;">@item.LocationName<br /><br />@item.DateEvent.ToString("dd/MM/yyy")</div>
-            <div class="col-md-4" style="width:150px;"><button class="btn btn-primary">Booking</button></div>
+            <div class="col-md-4"> <a href=@Url.Action("Profil","Artist",new {id = item.ArtistID})> <img src=@item.ArtistPhoto></a></div>
+            <div class="col-md-6" style="width:150px; text-align:center;">
+                <div class="row" style="height:60px;">
+                    <div class="col">@item.LocationName</div>
+                </div>               
+                <div class="row" style="height:120px;">
+                    <div class="col">@item.DateEvent.ToString("dd/MM/yyy")</div>
+                </div>         
+                <div class="row" style="height:60px;">
+                    <div class="col"><button class="btn btn-primary">Booking</button></div>
+                </div>
+            </div>
         </div>
 
     }
 
 
 
-    @{      
+    @{
         if (Model.offset != 0)
         {<span> @Html.ActionLink("Previous", "Index", new { offset = Model.offset - 3 })&nbsp;|&nbsp;</span>}<span> @Html.ActionLink("Next", "Index", new { offset = Model.offset + 3 })</span>
     }

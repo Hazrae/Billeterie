@@ -1,0 +1,28 @@
+﻿@model Billeterie_Web.ViewModel.ArtistViewModel
+
+@{
+    ViewData["Title"] = "Profil";
+}
+
+<h1 style="margin-bottom:50px">@Model.ArtistName</h1>
+
+<body> 
+    <div>
+        <div class="container">
+            <div class="row" style=" margin: 1px;padding: 1px;height: 350px;">
+                <div class="col-md-4" style="width:450px;"><img src=@Model.ArtistPhoto></div>
+                <div class="col-md-4" style="width:150px; text-align:center;">@Model.ArtistDesc</div>
+            </div>
+            @foreach (var item in Model.ListEvent)
+            {
+                <div class="row" style="border-bottom:1px solid #822b2b !important">
+                    <div class="col-md-3">@item.EventName</div>
+                    <div class="col-md-3">@item.EventDate.ToString("dd/MM/yyy")</div>
+                    <div class="col-md-3">@item.LocationName</div>
+                    <div class="col-md-3" style="text-align:center"><button class="btn btn-primary">Booking</button></div>
+
+                </div>
+            }
+        </div>
+    </div>
+</body>
