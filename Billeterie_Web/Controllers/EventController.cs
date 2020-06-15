@@ -43,7 +43,7 @@ namespace Billeterie_Web.Controllers
         public IActionResult Booking([FromForm]BookingViewModel bvm)
         {
             //ajout en session
-            Console.WriteLine(bvm.tabSelectedTickets[0]);
+            SessionManager.Cart = bvm;
             return RedirectToAction("Index", "Home");
         }
     }

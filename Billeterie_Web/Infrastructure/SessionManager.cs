@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Billeterie_Web.ViewModel;
+using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +27,19 @@ namespace Billeterie_Web.Infrastructure
         {
             get { return (Session.GetString(nameof(Login)) is null) ? "" : Session.GetString(nameof(Login)); }
             set { Session.SetString(nameof(Login), value); }
+        }
+
+        public BookingViewModel Cart
+        {
+            get
+            {
+                string json = Session.GetString(nameof(Cart));
+                return (json is null) ? null : JsonConvert.DeserializeObject<BookingViewModel>(json);
+            }
+            set
+            {
+                Session.SetString(nameof(Cart), JsonConvert.SerializeObject(value));
+            }
         }
 
         public void Abandon()
