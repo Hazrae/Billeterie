@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Billeterie_Web.ViewModel
 {
-    public class Contact
+    public class ContactViewModel
     {
         [StringLength(100)]
         [Required]

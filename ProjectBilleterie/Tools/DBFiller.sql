@@ -16,20 +16,20 @@ values
 ('Ton cul','Ha bah c''est une bien belle salle ça madame')
 go
 
-insert into Ticket(Category, QtyAvailable,FK_Location)
+insert into Ticket(Category, QtyAvailable,Price,FK_Location)
 values
-('cat 1',69,1),
-('cat 1',69,2),
-('cat 1',69,3),
-('cat 1',69,4),
-('cat 2',10,1),
-('cat 2',10,2),
-('cat 2',10,3),
-('cat 2',10,4),
-('cat 3',15,1),
-('cat 3',16,2),
-('cat 3',17,3),
-('cat 3',18,4)
+('cat 1',69,20,1),
+('cat 1',69,20,2),
+('cat 1',69,20,3),
+('cat 1',69,25,4),
+('cat 2',10,45,1),
+('cat 2',10,51,2),
+('cat 2',10,52.5,3),
+('cat 2',10,64.7,4),
+('cat 3',15,100,1),
+('cat 3',16,102.5,2),
+('cat 3',17,110,3),
+('cat 3',18,252.9,4)
 go
 
 insert into [Event]([Date],[Name],FK_Location,FK_Artist)

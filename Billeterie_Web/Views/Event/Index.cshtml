@@ -1,4 +1,4 @@
-﻿@model Billeterie_Web.ViewModel.Eventby3;
+﻿@model Billeterie_Web.ViewModel.Eventby3ViewModel;
 
 @{
     ViewData["Title"] = "Index";
@@ -28,7 +28,7 @@
                     <div class="col">@item.DateEvent.ToString("dd/MM/yyy")</div>
                 </div>         
                 <div class="row" style="height:60px;">
-                    <div class="col"><button class="btn btn-primary">Booking</button></div>
+                    <div class="col"><a class="btn btn-primary" href=@Url.Action("Booking","Event",new {id = item.EventID})>Booking</a></div>
                 </div>
             </div>
         </div>

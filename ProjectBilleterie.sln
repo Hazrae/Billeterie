@@ -25,7 +25,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Models", "Models\Models.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API_Billeterie", "API_Billeterie\API_Billeterie.csproj", "{92A2AD31-92D8-4489-BAC9-27C36D34FA88}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Billeterie_Web", "Billeterie_Web\Billeterie_Web.csproj", "{E1484E7A-A386-4D91-A9BB-DC717053FCCB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Billeterie_Web", "Billeterie_Web\Billeterie_Web.csproj", "{E1484E7A-A386-4D91-A9BB-DC717053FCCB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

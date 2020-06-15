@@ -1,6 +1,8 @@
 ﻿using DAL_Billeterie.Repositories;
 using Microsoft.Extensions.Configuration;
+using Models.Booking;
 using Models.Event;
+using Models.Tickets;
 using Models.User;
 using System;
 using System.Collections.Generic;
@@ -25,6 +27,16 @@ namespace DAL_Billeterie.Services
         {
             throw new NotImplementedException();
         }
+        public Event GetOne(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Update(int id, EditUser t)
+        {
+            throw new NotImplementedException();
+        }
+
 
         public List<Event> GetBy3(int offset)
         {
@@ -41,10 +53,10 @@ namespace DAL_Billeterie.Services
                     //execution
                     connec.Open();
                     using (SqlDataReader dr = cmd.ExecuteReader())
-                    {                        
+                    {
                         while (dr.Read())
                         {
-                            list.Add( new Event
+                            list.Add(new Event
                             {
                                 EventID = (int)dr["EventID"],
                                 EventName = dr["Name"].ToString(),
@@ -54,7 +66,7 @@ namespace DAL_Billeterie.Services
                                 ArtistPhoto = dr["Photo"].ToString(),
                                 LocationID = (int)dr["LocationID"],
                                 LocationName = dr["location"].ToString()
-                            });                            
+                            });
                         }
                     }
                     return list;
@@ -62,14 +74,48 @@ namespace DAL_Billeterie.Services
             }
         }
 
-        public Event GetOne(int id)
+        public BookingDetails GetBookingDetails(int id)
         {
-            throw new NotImplementedException();
+            // Get Booking details of a specific events
+            using (SqlConnection connec = new SqlConnection(StringConnec))
+            {
+
+                using (SqlCommand cmd = new SqlCommand("GetBookingDetails", connec))
+                {
+                    BookingDetails Bd = new BookingDetails();
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("id", id);
+                    //execution
+                    connec.Open();
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (dr.Read())
+                        {
+                            Bd.ArtistID = (int)dr["ArtistID"];
+                            Bd.ArtistName = dr["Artist"].ToString();
+                            Bd.EventID = (int)dr["EventID"];
+                            Bd.EventDate = (DateTime)dr["Date"];
+                            Bd.EventName = dr["Event"].ToString();
+                            Bd.LocationName = dr["Location"].ToString();
+                            Bd.LocationDesc = dr["Desc"].ToString();
+
+                            do
+                            {
+                                Bd.listTicket.Add(new Ticket
+                                {
+                                    TicketID = (int)dr["TicketID"],
+                                    Category = dr["Category"].ToString(),
+                                    Price = (double)dr["Price"],
+                                    QtyAvailable = (int)dr["QtyAvailable"]
+                                }) ;
+                            } while ((dr.Read()));
+                        }
+                    }
+                    return Bd;
+                }
+            }
         }
 
-        public void Update(int id, EditUser t)
-        {
-            throw new NotImplementedException();
-        }
+  
     }
 }

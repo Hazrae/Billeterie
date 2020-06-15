@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace Billeterie_Web.ViewModel
 {
-    public class Eventby3
+    public class Eventby3ViewModel
     {
         public int offset { get; set; }
         public IEnumerable<Event> list { get; set; }
 
-        public Eventby3(IAPIConsume consume, int offset)
+        public Eventby3ViewModel(IAPIConsume consume, int offset)
         {
             this.offset = offset;
             list = consume.Get<IEnumerable<Event>>("Event/", offset);

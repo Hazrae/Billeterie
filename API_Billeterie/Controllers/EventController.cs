@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using DAL_Billeterie.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Models.Booking;
 using Models.Event;
 using Toolbox.Cryptography;
 
@@ -18,13 +19,7 @@ namespace API_Billeterie.Controllers
         {
         }
 
-        //// GET: api/Event
-        //[HttpGet]
-        //public IEnumerable<string> Get()
-        //{
-        //    return new string[] { "value1", "value2" };
-        //}
-
+      
         // GET: api/Event/5
         [HttpGet("{id}")]
         public List<Event> Get(int id)
@@ -32,22 +27,12 @@ namespace API_Billeterie.Controllers
             return _eventService.GetBy3(id);
         }
 
-        //// POST: api/Event
-        //[HttpPost]
-        //public void Post([FromBody] string value)
-        //{
-        //}
+        [HttpGet]
+        [Route("Booking/{id}")]
+        public BookingDetails GetDetails(int id)
+        {
+            return _eventService.GetBookingDetails(id);
+        }
 
-        //// PUT: api/Event/5
-        //[HttpPut("{id}")]
-        //public void Put(int id, [FromBody] string value)
-        //{
-        //}
-
-        //// DELETE: api/ApiWithActions/5
-        //[HttpDelete("{id}")]
-        //public void Delete(int id)
-        //{
-        //}
     }
 }

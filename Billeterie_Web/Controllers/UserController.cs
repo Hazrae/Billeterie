@@ -154,7 +154,7 @@ namespace Billeterie_Web.Controllers
 
         [ValidateAntiForgeryToken]
         [HttpPost]
-        public IActionResult Contact(Contact contact)
+        public IActionResult Contact(ContactViewModel contact)
         {
             SaslMechanismOAuth2 oauth2 = _googleToken.Token().Result;
             MimeMessage message = new MimeMessage();

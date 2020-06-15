@@ -99,6 +99,7 @@
     <Build Include="Artist\Stored Procedures\GetOneArtist.sql" />
     <Build Include="Event\Stored Procedures\GetEventsBy3.sql" />
     <Build Include="Artist\Stored Procedures\GetEventsByArtist.sql" />
+    <Build Include="Event\Stored Procedures\GetBookingDetails.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ProjectBilleterie.publish.xml" />
