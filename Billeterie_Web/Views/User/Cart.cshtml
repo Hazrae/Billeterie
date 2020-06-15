@@ -1,10 +1,11 @@
-﻿@model Billeterie_Web.ViewModel.BookingViewModel
+﻿@model List<Billeterie_Web.ViewModel.BookingViewModel>
 
 @{
     ViewData["Title"] = "Cart";
+    double sum = 0;
 }
 
-@{ if (Model is null)
+@{ if (Model.Count == 0)
     {
         <h2>Your cart is empty</h2>
 
@@ -16,54 +17,68 @@
     }
     else
     {
-        <h2>Your cart</h2>
 
-        <div class="row">
-            <div class="col-md-6">
-                <div class="row">
-                    <div class="col">
-                        @Model.EventName
+        <h2>Your cart</h2>
+        foreach (var item in Model)
+        {
+            <div class="row">
+                <div class="col-md-6" style="border-bottom: 1px solid #822b2b;">
+                    <div class="row">
+                        <div class="col">
+                            @item.EventName
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            @item.ArtistName
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            @item.EventDate
+                        </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col">
-                        @Model.ArtistName
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        @Model.EventDate
+                <div class="col-md-6" style="border-bottom: 1px solid #822b2b;">
+                    @foreach (var item2 in item.tabSelectedTickets)
+                    {
+                        if (item2.Qty != 0)
+                        {
+                            <div class="row">
+                                <div class="col">
+                                    @item2.Category
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    @item2.Qty
+                                </div>-
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    @item2.Price
+                                </div>
+                            </div>
+                            <br />
+                            double total = @item2.Price * @item2.Qty;
+                            <div class="row">
+                                <div class="col">
+                                    @total
+                                </div>
+                            </div>
+                            sum += total;
+                        }
+                    }
+                    <div class="row">
+                        <div class="col">
+                            Total : @sum €
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-6">
-                @foreach (var item in Model.tabSelectedTickets)
-                {
-                    <div class="row">
-                        <div class="col">
-                            @item.Category
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            @item.Qty
-                        </div>-
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            @item.Price
-                        </div>
-                    </div>
-                    <br />
-                    double total = @item.Price * @item.Qty;
-                    <div class="row">
-                        <div class="col">
-                            @total
-                        </div>
-                    </div>
-                }
-
-            </div>          
-        </div>
+            <br />
+            <br />                        
+            <a class="btn btn-primary" href=@Url.Action("Action","Controller")>Confirm my order</a>
+        }
     }
 }

@@ -29,12 +29,12 @@ namespace Billeterie_Web.Infrastructure
             set { Session.SetString(nameof(Login), value); }
         }
 
-        public BookingViewModel Cart
+        public List<BookingViewModel> Cart
         {
             get
             {
                 string json = Session.GetString(nameof(Cart));
-                return (json is null) ? null : JsonConvert.DeserializeObject<BookingViewModel>(json);
+                return (json is null) ? new List<BookingViewModel>() : JsonConvert.DeserializeObject<List<BookingViewModel>>(json);
             }
             set
             {

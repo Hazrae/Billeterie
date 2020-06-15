@@ -44,7 +44,9 @@ namespace Billeterie_Web.Controllers
         public IActionResult Booking([FromForm]BookingViewModel bvm)
         {
             //ajout en session
-            SessionManager.Cart = bvm;
+            List<BookingViewModel> list = SessionManager.Cart;
+            list.Add(bvm);
+            SessionManager.Cart = list;
             return RedirectToAction("Index", "Home");
         }
     }

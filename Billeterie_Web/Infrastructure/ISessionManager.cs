@@ -10,7 +10,7 @@ namespace Billeterie_Web.Infrastructure
     {
         public int Id { get; set; }
         public string Login { get; set; }
-        public BookingViewModel Cart { get; set; }
+        public List<BookingViewModel> Cart { get; set; }
         public void Abandon();
     }
 }
