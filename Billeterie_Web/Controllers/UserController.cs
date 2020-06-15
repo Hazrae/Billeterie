@@ -290,6 +290,13 @@ namespace Billeterie_Web.Controllers
             }
         }
 
+        public ActionResult Cart()
+        {
+            BookingViewModel bvm;
+            bvm = SessionManager.Cart;
+            return View(bvm);
+        }
+
         [AuthRequired]
         public ActionResult Logout()
         {

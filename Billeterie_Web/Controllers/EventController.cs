@@ -29,7 +29,7 @@ namespace Billeterie_Web.Controllers
 
              return View(listEvent);
         }
-
+        [AuthRequired]
         public IActionResult Booking(int id)
         {
             BookingViewModel bvm = ConsumeInstance.Get<BookingViewModel>("Event/Booking/",id);
@@ -40,6 +40,7 @@ namespace Billeterie_Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthRequired]
         public IActionResult Booking([FromForm]BookingViewModel bvm)
         {
             //ajout en session
