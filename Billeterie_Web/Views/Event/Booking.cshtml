@@ -13,15 +13,29 @@
             <form asp-action="Booking">
                 <div class="row" style=" margin: 1px;padding: 1px;">
                     <div class="col-md-6">
+
                         <input type="hidden" asp-for="EventID" value="@Model.EventID" />
                         <input type="hidden" asp-for="ArtistID" value="@Model.ArtistID" />
-                        <div class="row" style=" margin: 1px;padding: 1px; height:30px">@Model.ArtistName</div>
+
+                        <div class="row" style=" margin: 1px;padding: 1px;">
+                            <div class="col-sm-11">@Model.ArtistName</div>
+                        </div>
+
                         <input type="hidden" asp-for="ArtistName" value="@Model.ArtistName" />
-                        <div class="row" style=" margin: 1px;padding: 1px; height:30px">@Model.EventName</div>
+                        <div class="row" style=" margin: 1px;padding: 1px;">
+                            <div class="col-sm-11">@Model.EventName</div>
+                        </div>
+
                         <input type="hidden" asp-for="EventName" value="@Model.EventName" />
-                        <div class="row" style=" margin: 1px;padding: 1px; height:30px">@Model.EventDate.ToString("dd/MM/yyy - HH/mm")</div>
+                        <div class="row" style=" margin: 1px;padding: 1px;">
+                            <div class="col-sm-11">@Model.EventDate.ToString("dd/MM/yyy - HH/mm")</div>
+                        </div>
+
                         <input type="hidden" asp-for="EventDate" value="@Model.EventDate" />
-                        <div class="row" style=" margin: 1px;padding: 1px; height:30px">@Model.LocationName</div>
+                        <div class="row" style=" margin: 1px;padding: 1px;">
+                            <div class="col-sm-11">@Model.LocationName</div>
+                        </div>
+
                         <input type="hidden" asp-for="LocationName" value="@Model.LocationName" />
 
                     </div>
@@ -29,22 +43,24 @@
 
                     <div class="col-md-6" text-align:center;">
                         @foreach (var item in Model.listTicket)
-                        {                           
-                        <div class="row">
-                            <div class="col-sm-3" style=" margin: 1px;padding: 1px; height:30px">@item.Category</div>
-                            <div class="col-sm-3" style=" margin: 1px;padding: 1px; height:30px">@item.Price €</div>                            
-                            <div class="col-sm-3" style=" margin: 1px;padding: 1px; height:30px"> @item.QtyAvailable left</div>
-                            <div class="col-sm-3" style=" margin: 1px;padding: 1px; height:30px">
-                                <input asp-for="tabSelectedTickets[count].Qty" class="form-control" />
-                                <input type="hidden" asp-for="tabSelectedTickets[count].TicketID" value="@item.TicketID" />
-                                <input type="hidden" asp-for="tabSelectedTickets[count].Category" value="@item.Category" />
-                                <input type="hidden" asp-for="tabSelectedTickets[count].Price" value="@item.Price" />
+                        {
+                            <div class="row">
+                                <div class="col-sm-2" style=" margin: 1px;padding: 1px; height:30px">@item.Category</div>
+                                <div class="col-sm-2" style=" margin: 1px;padding: 1px; height:30px">@item.Price €</div>
+                                <div class="col-sm-2" style=" margin: 1px;padding: 1px; height:30px"> @item.QtyAvailable left</div>
+                                <div class="col-sm-2" style=" margin: 1px;padding: 1px; height:30px">
+                                    <input asp-for="tabSelectedTickets[count].Qty" class="form-control" />
+                                    <input type="hidden" asp-for="tabSelectedTickets[count].TicketID" value="@item.TicketID" />
+                                    <input type="hidden" asp-for="tabSelectedTickets[count].Category" value="@item.Category" />
+                                    <input type="hidden" asp-for="tabSelectedTickets[count].Price" value="@item.Price" />
+                                </div>
                             </div>
-                        </div>
                             count++;
                         }
                     </div>
                 </div>
+                <br />
+                <br />
                 <div class="row">
                     <button class="btn btn-outline-primary" type="submit" value="Booking">Submit</button>
                 </div>
