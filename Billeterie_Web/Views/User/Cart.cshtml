@@ -1,0 +1,69 @@
+﻿@model Billeterie_Web.ViewModel.BookingViewModel
+
+@{
+    ViewData["Title"] = "Cart";
+}
+
+@{ if (Model is null)
+    {
+        <h2>Your cart is empty</h2>
+
+        <div>Check our events!</div>
+        <br />
+        <br />
+        <a class="btn btn-primary" href=@Url.Action("Index","Event",new {offset = 0})>Events</a>
+
+    }
+    else
+    {
+        <h2>Your cart</h2>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col">
+                        @Model.EventName
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        @Model.ArtistName
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        @Model.EventDate
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                @foreach (var item in Model.tabSelectedTickets)
+                {
+                    <div class="row">
+                        <div class="col">
+                            @item.Category
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            @item.Qty
+                        </div>-
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            @item.Price
+                        </div>
+                    </div>
+                    <br />
+                    double total = @item.Price * @item.Qty;
+                    <div class="row">
+                        <div class="col">
+                            @total
+                        </div>
+                    </div>
+                }
+
+            </div>          
+        </div>
+    }
+}
