@@ -39,46 +39,44 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6" style="border-bottom: 1px solid #822b2b;">
+                <div class="col-md-6" style="border-bottom: 1px solid #822b2b; text-align:right">
                     @foreach (var item2 in item.tabSelectedTickets)
                     {
                         if (item2.Qty != 0)
                         {
                             <div class="row">
                                 <div class="col">
-                                    @item2.Category
+                                    Category : @item2.Category
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col">
-                                    @item2.Qty
-                                </div>-
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    @item2.Price
+                                    @item2.Qty Tickets
                                 </div>
                             </div>
                             <br />
                             double total = @item2.Price * @item2.Qty;
                             <div class="row">
                                 <div class="col">
-                                    @total
+                                    Total : @total €
                                 </div>
                             </div>
+                            <br />
                             sum += total;
                         }
                     }
                     <div class="row">
-                        <div class="col">
+                        <div class="col" style="margin-bottom:10px" ;>
                             Total : @sum €
                         </div>
                     </div>
                 </div>
             </div>
-            <br />
-            <br />                        
-            <a class="btn btn-primary" href=@Url.Action("Action","Controller")>Confirm my order</a>
+
         }
+        <br />
+        <br />
+
+        <a class="btn btn-primary" href=@Url.Action("Action","Controller")>Confirm my order</a>
     }
 }

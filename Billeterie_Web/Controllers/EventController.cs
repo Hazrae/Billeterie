@@ -25,7 +25,8 @@ namespace Billeterie_Web.Controllers
             //les process et affichage dans ma vue
             // pagination +3 offset
 
-            Eventby3ViewModel listEvent = new Eventby3ViewModel(ConsumeInstance, (offset < 0)?0:offset);                 
+            Eventby3ViewModel listEvent = new Eventby3ViewModel(ConsumeInstance, (offset < 0)?0:offset);     
+            
 
              return View(listEvent);
         }
