@@ -46,12 +46,16 @@
                             }
                             else
                             {
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Edit">@_session.Login Profile </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Logout">Deconnexion</a>
-                                </li>
+                                <div class="dropdown">
+                                    <button class="btn btn-light" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        @_session.Login
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Edit">My Profile </a>
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Cart">My Cart</a>
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Logout">Logout</a>
+                                    </div>
+                                </div>
                             }
                         }
                     </ul>
