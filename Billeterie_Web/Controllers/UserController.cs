@@ -292,9 +292,18 @@ namespace Billeterie_Web.Controllers
 
         public ActionResult Cart()
         {
-            List<BookingViewModel> bvm;
-            bvm = SessionManager.Cart;
-            return View(bvm);
+
+            //List<BookingViewModel> bvm;
+            //bvm = SessionManager.Cart;       
+            CheckoutViewModel CVM = new CheckoutViewModel(SessionManager,ConsumeInstance);           
+            return View(CVM);
+        }
+
+     
+        public ActionResult Checkout()
+        {
+
+            return View();
         }
 
         [AuthRequired]

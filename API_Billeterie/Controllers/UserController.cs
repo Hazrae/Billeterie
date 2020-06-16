@@ -18,6 +18,14 @@ namespace API_Billeterie.Controllers
     public class UserController : BaseController
     {
         public UserController(IRSAEncryption encrypt, IUser userService) : base(encrypt, userService) { }
+
+        [HttpGet]
+        [Route("GetCheckOutInfo/{id}")]
+        public UserCheckOut GetCheckOutInfo(int id)
+        {
+            return  _userService.GetCheckOutInfo(id);
+        }
+
         // GET: api/User
         [HttpGet]
         public IEnumerable<string> Get()
@@ -106,13 +114,6 @@ namespace API_Billeterie.Controllers
                 return new UserResponse { ErrorCode = 3 };
             else
                 return new UserResponse();
-        }
-
-        [HttpGet]
-        [Route("GetCard/{id}")]
-        public UserCard GetCard(int id)
-        {
-            return _userService.GetCard(id);
-        }
+        }        
     }
 }

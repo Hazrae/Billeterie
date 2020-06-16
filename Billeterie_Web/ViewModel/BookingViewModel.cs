@@ -16,7 +16,7 @@ namespace Billeterie_Web.ViewModel
         public string LocationName { get; set; }
         public string LocationDesc { get; set; }
         public List<Ticket> listTicket { get; set; }
-        public SelectedTicket[] tabSelectedTickets { get; set; }
+        public SelectedTicket[] tabSelectedTickets { get; set; }        
 
         public BookingViewModel()
         {

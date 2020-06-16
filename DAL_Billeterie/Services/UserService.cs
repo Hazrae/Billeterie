@@ -163,18 +163,18 @@ namespace DAL_Billeterie.Services
             }
         }
 
-        public void AddCard(UserCard uc)
+        public void AddCard(UserCheckOut uc)
         {
             throw new NotImplementedException();
         }
 
-        public UserCard GetCard(int id)
+        public UserCheckOut GetCheckOutInfo(int id)
         {
             // Get an user car through his ID
             using (SqlConnection connec = new SqlConnection(StringConnec))
             {
 
-                using (SqlCommand cmd = new SqlCommand("GetCard", connec))
+                using (SqlCommand cmd = new SqlCommand("GetCheckoutInfo", connec))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("id", id);
@@ -183,12 +183,14 @@ namespace DAL_Billeterie.Services
                     using (SqlDataReader dr = cmd.ExecuteReader())
                     {
                         dr.Read();
-                        return new UserCard
+
+                        return new UserCheckOut
                         {
                             UserID = id,
-                            CB_Num = (long)dr["CB_Num"],
-                            CB_Valid = (DateTime)dr["CB_Valid"]
-                        }; 
+                            CB_Num = (dr["CB_Num"] is DBNull) ? null : (long?)dr["CB_Num"],
+                            CB_Valid = (!(dr["CB_Valid"] is DBNull)) ? (DateTime)dr["CB_Valid"] : new DateTime(1900,1,1),
+                            UserMail = dr["Mail"].ToString()
+                        };
                     }
                 }
             }
