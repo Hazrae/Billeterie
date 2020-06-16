@@ -4,7 +4,7 @@
 	@code nvarchar(255),
 	@id int
 AS
-	UPDATE [User]
+		UPDATE [User]
 	SET CB_Num =  @num, 
 		CB_Valid = @valid
 	WHERE UserID = @id

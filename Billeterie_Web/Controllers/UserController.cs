@@ -303,7 +303,14 @@ namespace Billeterie_Web.Controllers
         {
             if (CVM.user.CB_Num_Enter!= SessionManager.CB_Num.ToString())
             {
-                //ajout de la CB
+                UserCard uc = new UserCard
+                {
+                    UserID = SessionManager.Id,
+                    CB_Num = long.Parse(CVM.user.CB_Num_Enter),
+                    CB_Valid = new DateTime(1900, int.Parse(CVM.user.CB_Valid_Enter.Substring(0,2)), int.Parse(CVM.user.CB_Valid_Enter.Substring(2, 2)))             
+                };
+
+                ConsumeInstance.Post<UserCard>("User/AddCard",uc);
             }
             FlashMessage.Confirmation("Purchase Confirmed - Tickets sent by mail");
             return RedirectToAction("Index","Home");

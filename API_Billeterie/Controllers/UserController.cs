@@ -75,6 +75,7 @@ namespace API_Billeterie.Controllers
             return _userService.Login(u);
         }
 
+
         // PUT: api/User/5
         [HttpPut("{id}")]
         public UserResponse Put(int id, [FromBody] EditUser u)
@@ -114,6 +115,14 @@ namespace API_Billeterie.Controllers
                 return new UserResponse { ErrorCode = 3 };
             else
                 return new UserResponse();
-        }        
+        }      
+        
+        [HttpPost]
+        [Route("AddCard")]
+        public void AddCard(UserCard uc)
+        {
+            _userService.AddCard(uc);
+        }
+            
     }
 }

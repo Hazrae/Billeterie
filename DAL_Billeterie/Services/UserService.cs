@@ -163,7 +163,7 @@ namespace DAL_Billeterie.Services
             }
         }
 
-        public void AddCard(UserCheckOut uc)
+        public void AddCard(UserCard uc)
         {
             throw new NotImplementedException();
         }

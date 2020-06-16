@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Models.User
 {
-    class UserCard
+    public class UserCard
     {
         public int UserID { get; set; }     
 
