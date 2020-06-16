@@ -41,6 +41,19 @@ namespace Billeterie_Web.Infrastructure
                 Session.SetString(nameof(Cart), JsonConvert.SerializeObject(value));
             }
         }
+        public long? CB_Num
+        {
+            get
+            {
+                string json = Session.GetString(nameof(CB_Num));
+                return (json is null) ? 0 : JsonConvert.DeserializeObject<long?>(json);
+            }
+            set
+            {
+                Session.SetString(nameof(CB_Num), JsonConvert.SerializeObject(value));
+            }
+        }
+
 
         public void Abandon()
         {

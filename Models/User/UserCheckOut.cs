@@ -11,5 +11,9 @@ namespace Models.User
 
         public long? CB_Num { get; set; }
         public DateTime CB_Valid { get; set; }
+        public string CB_Valid_Enter { get; set; }
+        public string CB_Num_Enter { get; set; }
+        public int CB_Code_Enter { get; set; }
+        public int CB_Code { get; set; }
     }
 }

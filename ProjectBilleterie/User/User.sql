@@ -7,7 +7,6 @@
 	BirthDate DATETIME2 not null,
 	CB_Num BIGINT,
 	CB_Valid DATETIME2,
-	CB_Code VARBINARY(64),
 	IsAdmin bit default 0,
 	IsActive bit default 1,
 	FK_Country int not null

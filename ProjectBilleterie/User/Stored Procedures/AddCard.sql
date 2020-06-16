@@ -6,6 +6,5 @@
 AS
 	UPDATE [User]
 	SET CB_Num =  @num, 
-		CB_Valid = @valid, 
-		CB_Code = HASHBYTES('SHA2_512',dbo.Salt() +@code)
+		CB_Valid = @valid
 	WHERE UserID = @id

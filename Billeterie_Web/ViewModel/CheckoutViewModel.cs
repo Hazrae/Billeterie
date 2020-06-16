@@ -10,14 +10,20 @@ namespace Billeterie_Web.ViewModel
 {
     public class CheckoutViewModel
     {
-        public List<BookingViewModel> listBVM;
-        public UserCheckOut user;
+        public List<BookingViewModel> listBVM { get; set; }
+        public UserCheckOut user { get; set; }
 
         public CheckoutViewModel(ISessionManager SessionManager, IAPIConsume ConsumeInstance)
         {
             listBVM = new List<BookingViewModel>();
             listBVM = SessionManager.Cart;
             user = ConsumeInstance.Get<UserCheckOut>("User/GetCheckOutInfo/", SessionManager.Id);
+        }
+
+        public CheckoutViewModel() 
+        {
+            user = new UserCheckOut();
+            listBVM = new List<BookingViewModel>();
         }
     }
 }

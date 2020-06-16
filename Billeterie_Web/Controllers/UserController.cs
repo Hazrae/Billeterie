@@ -291,20 +291,24 @@ namespace Billeterie_Web.Controllers
         }
 
         public ActionResult Cart()
-        {
-
-            //List<BookingViewModel> bvm;
-            //bvm = SessionManager.Cart;       
-            CheckoutViewModel CVM = new CheckoutViewModel(SessionManager,ConsumeInstance);           
+        {              
+            CheckoutViewModel CVM = new CheckoutViewModel(SessionManager,ConsumeInstance);
+            SessionManager.CB_Num = CVM.user.CB_Num;
             return View(CVM);
-        }
+        }   
 
-     
-        public ActionResult Checkout()
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Cart([FromForm]CheckoutViewModel CVM)
         {
+            if (CVM.user.CB_Num_Enter!= SessionManager.CB_Num.ToString())
+            {
+                //ajout de la CB
+            }
+            FlashMessage.Confirmation("Purchase Confirmed - Tickets sent by mail");
+            return RedirectToAction("Index","Home");
+        }   
 
-            return View();
-        }
 
         [AuthRequired]
         public ActionResult Logout()
