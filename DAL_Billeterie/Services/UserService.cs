@@ -132,7 +132,7 @@ namespace DAL_Billeterie.Services
                             IsActive = (bool)dr["IsActive"],                          
                             IsAdmin = (bool)dr["IsAdmin"],
                             Country = (int)dr["FK_Country"]
-                        }; ;
+                        }; 
                     }
                 }
             }
@@ -166,6 +166,32 @@ namespace DAL_Billeterie.Services
         public void AddCard(UserCard uc)
         {
             throw new NotImplementedException();
+        }
+
+        public UserCard GetCard(int id)
+        {
+            // Get an user car through his ID
+            using (SqlConnection connec = new SqlConnection(StringConnec))
+            {
+
+                using (SqlCommand cmd = new SqlCommand("GetCard", connec))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("id", id);
+                    //execution
+                    connec.Open();
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        dr.Read();
+                        return new UserCard
+                        {
+                            UserID = id,
+                            CB_Num = (long)dr["CB_Num"],
+                            CB_Valid = (DateTime)dr["CB_Valid"]
+                        }; 
+                    }
+                }
+            }
         }
     }
 }

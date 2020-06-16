@@ -107,5 +107,12 @@ namespace API_Billeterie.Controllers
             else
                 return new UserResponse();
         }
+
+        [HttpGet]
+        [Route("GetCard/{id}")]
+        public UserCard GetCard(int id)
+        {
+            return _userService.GetCard(id);
+        }
     }
 }
