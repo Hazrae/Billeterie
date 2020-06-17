@@ -292,6 +292,7 @@ namespace Billeterie_Web.Controllers
             }
         }
 
+        [AuthRequired]
         public ActionResult Cart()
         {              
             CheckoutViewModel CVM = new CheckoutViewModel(SessionManager,ConsumeInstance);
@@ -301,6 +302,7 @@ namespace Billeterie_Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthRequired]
         public ActionResult Cart([FromForm]CheckoutViewModel CVM)
         {
             if (CVM.user.CB_Num_Enter!= SessionManager.CB_Num)

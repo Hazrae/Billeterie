@@ -51,7 +51,7 @@ namespace DAL_Billeterie.Services
                     {
                         using (SqlCommand cmd1 = new SqlCommand("AddBookingSelection", connec))
                         {
-                            cmd1.CommandType = CommandType.StoredProcedure;
+                            cmd1.CommandType = CommandType.StoredProcedure; 
 
                             cmd1.Parameters.AddWithValue("idBooking", IDBooking);
                             cmd1.Parameters.AddWithValue("idEvent", item.EventID);                       

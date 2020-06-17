@@ -44,14 +44,14 @@ go
 
 insert into Country ([Name])
 values
-('Allemagne'),
-('Belgique'),
+('Germany'),
+('Belgium'),
 ('France'),
 ('Ukraine'),
 ('Zanarkand'),
 ('Midgard'),
-('Royaume-Uni'),
-('Pays-Bas')
+('England'),
+('Your Ass')
 go
 
 insert into [User] ([Login],[Password],Mail,BirthDate,FK_Country,IsActive,IsAdmin)
