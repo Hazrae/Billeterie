@@ -47,7 +47,7 @@
                             <div class="row">
                                 <div class="col-sm-2" style=" margin: 1px;padding: 1px; height:30px">@item.Category</div>
                                 <div class="col-sm-2" style=" margin: 1px;padding: 1px; height:30px">@item.Price €</div>
-                                <div class="col-sm-2" style=" margin: 1px;padding: 1px; height:30px"> @item.QtyAvailable left</div>
+                                @*<div class="col-sm-2" style=" margin: 1px;padding: 1px; height:30px"> @item.QtyAvailable left</div>*@
                                 <div class="col-sm-2" style=" margin: 1px;padding: 1px; height:30px">
                                     <input asp-for="tabSelectedTickets[count].Qty" class="form-control" />
                                     <input type="hidden" asp-for="tabSelectedTickets[count].TicketID" value="@item.TicketID" />

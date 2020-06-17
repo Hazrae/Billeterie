@@ -9,7 +9,7 @@ namespace Models.Tickets
         public int TicketID { get; set; }
         public string Category { get; set; }
         public double Price { get; set; }
-        public int QtyAvailable { get; set; }
+        //public int QtyAvailable { get; set; }
 
     }
 }

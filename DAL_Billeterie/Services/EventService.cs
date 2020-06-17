@@ -106,7 +106,7 @@ namespace DAL_Billeterie.Services
                                     TicketID = (int)dr["TicketID"],
                                     Category = dr["Category"].ToString(),
                                     Price = (double)dr["Price"],
-                                    QtyAvailable = (int)dr["QtyAvailable"]
+                                    //QtyAvailable = (int)dr["QtyAvailable"]
                                 }) ;
                             } while ((dr.Read()));
                         }

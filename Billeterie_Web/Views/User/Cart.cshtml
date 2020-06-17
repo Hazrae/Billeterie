@@ -176,13 +176,10 @@
                                                                             <div class="input-group"> <input asp-for="user.CB_Num_Enter"type="text" id="cr_no" placeholder="0000 0000 0000 0000" value="@Model.user.CB_Num" minlength="19" maxlength="19"> <label>CARD NUMBER</label> </div>
                                                                         </div>
                                                                     </div>
-                                                                    <div class="row">
-                                                                        @{string date;
-                                                                            date = (Model.user.CB_Valid.Year == 1900) ? null : Model.user.CB_Valid.ToString("MM/yy");
-                                                                        }
+                                                                    <div class="row">                                                                       
                                                                         <div class="col-6">
                                                                             <div class="input-group">
-                                                                                <input asp-for="user.CB_Valid_Enter"type="text" id="exp" placeholder="MM/YY" value="@date" minlength="5" maxlength="5"> <label>CARD EXPIRY</label>
+                                                                                <input asp-for="user.CB_Valid_Enter"type="text" id="exp" placeholder="MM/YY" value="@Model.user.CB_Valid" minlength="5" maxlength="5"> <label>CARD EXPIRY</label>
                                                                             </div>
                                                                         </div>
 

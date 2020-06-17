@@ -8,7 +8,7 @@ namespace Models.User
     {
         public int UserID { get; set; }     
 
-        public long CB_Num { get; set; }
-        public DateTime CB_Valid { get; set; }
+        public string CB_Num { get; set; }
+        public string CB_Valid { get; set; }
     }
 }

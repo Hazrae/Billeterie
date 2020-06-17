@@ -18,6 +18,8 @@ using Microsoft.Extensions.Configuration;
 using MailKit.Security;
 using MimeKit;
 using MailKit.Net.Smtp;
+using Models.Booking;
+using Models.Tickets;
 
 namespace Billeterie_Web.Controllers
 {
@@ -301,17 +303,16 @@ namespace Billeterie_Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Cart([FromForm]CheckoutViewModel CVM)
         {
-            if (CVM.user.CB_Num_Enter!= SessionManager.CB_Num.ToString())
+            if (CVM.user.CB_Num_Enter!= SessionManager.CB_Num)
             {
-                UserCard uc = new UserCard
-                {
-                    UserID = SessionManager.Id,
-                    CB_Num = long.Parse(CVM.user.CB_Num_Enter),
-                    CB_Valid = new DateTime(1900, int.Parse(CVM.user.CB_Valid_Enter.Substring(0,2)), int.Parse(CVM.user.CB_Valid_Enter.Substring(2, 2)))             
-                };
-
+                UserCard uc = new UserCard();
+                uc.UserID = SessionManager.Id;
+                uc.CB_Num = CVM.user.CB_Num_Enter;
+                uc.CB_Valid = CVM.user.CB_Valid_Enter;           
+                
                 ConsumeInstance.Post<UserCard>("User/AddCard",uc);
             }
+
             FlashMessage.Confirmation("Purchase Confirmed - Tickets sent by mail");
             return RedirectToAction("Index","Home");
         }   
@@ -324,5 +325,31 @@ namespace Billeterie_Web.Controllers
             return RedirectToAction("Index", "Home");
         }
        
+        public void Purchase()
+        {
+            // post des booking            
+            Booking book = new Booking();
+            book.UserID = SessionManager.Id;
+            
+            foreach(var item in SessionManager.Cart)
+            {
+                BookingSelection select = new BookingSelection();
+                select.EventID = item.EventID;
+                foreach(var item2 in item.tabSelectedTickets)
+                {
+                    select.listTicket.Add(new BookingTicket
+                    {
+                        TicketID = item2.TicketID,
+                        Qty = item2.Qty
+                    });
+                }
+                book.list.Add(select);
+            }
+
+            //envoi à la DB
+
+            // MAJ session
+            SessionManager.Cart = null;
+        }
     }
 }

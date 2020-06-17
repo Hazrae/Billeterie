@@ -5,8 +5,8 @@
 	[Password] varbinary(64) not null,
 	Mail nvarchar(255) not null,
 	BirthDate DATETIME2 not null,
-	CB_Num BIGINT,
-	CB_Valid DATETIME2,
+	CB_Num NVARCHAR(50),
+	CB_Valid NVARCHAR(5),
 	IsAdmin bit default 0,
 	IsActive bit default 1,
 	FK_Country int not null

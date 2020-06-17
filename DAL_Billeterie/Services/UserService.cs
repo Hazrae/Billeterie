@@ -165,7 +165,21 @@ namespace DAL_Billeterie.Services
 
         public void AddCard(UserCard uc)
         {
-            throw new NotImplementedException();
+            using (SqlConnection connec = new SqlConnection(StringConnec))
+            {
+                //Add user in DB            
+                using (SqlCommand cmd = new SqlCommand("AddCard", connec))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("num", uc.CB_Num);
+                    cmd.Parameters.AddWithValue("valid", uc.CB_Valid);             
+                    cmd.Parameters.AddWithValue("id", uc.UserID);
+
+                    connec.Open();
+                    cmd.ExecuteNonQuery();
+                }
+            }
         }
 
         public UserCheckOut GetCheckOutInfo(int id)
@@ -187,8 +201,8 @@ namespace DAL_Billeterie.Services
                         return new UserCheckOut
                         {
                             UserID = id,
-                            CB_Num = (dr["CB_Num"] is DBNull) ? null : (long?)dr["CB_Num"],
-                            CB_Valid = (!(dr["CB_Valid"] is DBNull)) ? (DateTime)dr["CB_Valid"] : new DateTime(1900,1,1),
+                            CB_Num = dr["CB_Num"].ToString(),
+                            CB_Valid = dr["CB_Valid"].ToString(),
                             UserMail = dr["Mail"].ToString()
                         };
                     }
