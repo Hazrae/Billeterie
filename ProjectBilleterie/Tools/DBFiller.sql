@@ -69,19 +69,30 @@ values
 ('j''adore les pâtes!', '2020-4-10',3,5)
 go
 
-insert into Booking ([Date], FK_User, FK_Event)
+insert into Booking ([Date], FK_User)
 values
-('2020-6-10',1,1),
-('2020-6-4',2,2),
-('2020-10-10',3,3),
-('2020-6-15',4,4)
+('2020-6-10',1),
+('2020-6-4',2),
+('2020-10-10',3),
+('2020-6-15',4)
 go
 
-insert into BookingTicket(Qty,FK_Ticket,FK_Booking)
+insert into BookingSelection(FK_Event,FK_Booking)
 values
-(2,3,3),
-(2,5,4),
-(2,7,3),
-(2,10,2)
+(1,1),
+(2,2),
+(3,1),
+(2,3),
+(1,4)
+
+insert into BookingTicket(Qty,FK_Ticket,FK_BookingSelection)
+values
+(2,3,1),
+(2,5,1),
+(2,7,2),
+(2,10,3)
 go
+
+
+
 

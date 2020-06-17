@@ -18,6 +18,7 @@ namespace API_Billeterie.Controllers
         protected IUser _userService;
         protected IEvent _eventService;
         protected IArtist _artistService;
+        protected IBooking _bookingService;
         public BaseController(IRSAEncryption encrypt, IUser userService)
         {
             _encrypt = encrypt;
@@ -34,6 +35,12 @@ namespace API_Billeterie.Controllers
         {
             _encrypt = encrypt;
             _artistService = artistService;
+        }
+
+        public BaseController(IRSAEncryption encrypt, IBooking bookingService)
+        {
+            _encrypt = encrypt;
+            _bookingService = bookingService;
         }
     }
 }

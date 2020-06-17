@@ -9,6 +9,11 @@ namespace Models.Booking
     {
         public int UserID { get; set; }
         public List<BookingSelection> list { get; set; }
+
+        public Booking()
+        {
+            list = new List<BookingSelection>();
+        }
         
     }
 }

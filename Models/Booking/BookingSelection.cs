@@ -9,5 +9,13 @@ namespace Models.Booking
     {
         public int EventID { get; set; }
         public List<BookingTicket> listTicket{get;set;}
+
+        public BookingSelection()
+        {
+            listTicket = new List<BookingTicket>();
+        }
     }
+
+
+
 }

@@ -35,6 +35,7 @@ namespace API_Billeterie
             services.AddSingleton<IUser, UserService>();          
             services.AddSingleton<ICountry, CountryService>();
             services.AddSingleton<IArtist, ArtistService>();
+            services.AddSingleton<IBooking, BookingService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

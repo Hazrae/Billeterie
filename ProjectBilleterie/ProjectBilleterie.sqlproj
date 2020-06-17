@@ -73,6 +73,9 @@
     <Folder Include="Artist\Stored Procedures" />
     <Folder Include="Event\Stored Procedures" />
     <Folder Include="Booking_Selection" />
+    <Folder Include="Booking\Stored Procedures" />
+    <Folder Include="Booking_Selection\Stored Procedures" />
+    <Folder Include="Booking_Ticket\Stored Procedures" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tools\Salt.sql" />
@@ -103,6 +106,9 @@
     <Build Include="Event\Stored Procedures\GetBookingDetails.sql" />
     <Build Include="User\Stored Procedures\GetCheckoutInfo.sql" />
     <Build Include="Booking_Selection\BookingSelection.sql" />
+    <Build Include="Booking\Stored Procedures\AddBooking.sql" />
+    <Build Include="Booking_Selection\Stored Procedures\AddBookingSelection.sql" />
+    <Build Include="Booking_Ticket\Stored Procedures\AddBookingTicket.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ProjectBilleterie.publish.xml" />

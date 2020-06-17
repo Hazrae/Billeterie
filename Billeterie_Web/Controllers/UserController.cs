@@ -312,7 +312,7 @@ namespace Billeterie_Web.Controllers
                 
                 ConsumeInstance.Post<UserCard>("User/AddCard",uc);
             }
-
+            Purchase();
             FlashMessage.Confirmation("Purchase Confirmed - Tickets sent by mail");
             return RedirectToAction("Index","Home");
         }   
@@ -337,19 +337,22 @@ namespace Billeterie_Web.Controllers
                 select.EventID = item.EventID;
                 foreach(var item2 in item.tabSelectedTickets)
                 {
-                    select.listTicket.Add(new BookingTicket
+                    if (item2.Qty != 0)
                     {
-                        TicketID = item2.TicketID,
-                        Qty = item2.Qty
-                    });
+                        select.listTicket.Add(new BookingTicket
+                        {
+                            TicketID = item2.TicketID,
+                            Qty = item2.Qty
+                        });
+                    }
                 }
                 book.list.Add(select);
             }
-
             //envoi à la DB
+            ConsumeInstance.Post<Booking>("Booking", book);
 
             // MAJ session
-            SessionManager.Cart = null;
+            SessionManager.Cart = new List<BookingViewModel>();
         }
     }
 }
