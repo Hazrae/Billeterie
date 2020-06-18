@@ -2,7 +2,24 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
+@*<div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+</div>*@
+
+<body>
+    <div class="photo-gallery">
+        <div class="container">
+            <div class="intro">
+                <h2 class="text-center">All the fake tickets you can book!</h2>
+                <p class="text-center" style="padding-top:30px"><img src="~/datas/2.jpg" class="img-fluid" /></p>
+            </div>
+            <div class="row photos" style="padding-top:50px">
+                <div class="col-sm-6 col-md-4 col-lg-3 item"><a href="building.jpg" data-lightbox="photos"><img src="~/datas/4.jpg" class="img-fluid" /></a></div>
+                <div class="col-sm-6 col-md-4 col-lg-3 item" style="padding-top:45px">@*<a href="desk.jpg" data-lightbox="photos"><img src="~/datas/1.jpg" class="img-fluid" /></a>*@</div>
+                <div class="col-sm-6 col-md-4 col-lg-3 item" style="padding-top:40px">@*<a href="loft.jpg" data-lightbox="photos"><img src="~/datas/3.jpg" class="img-fluid" /></a>*@</div>
+                <div class="col-sm-6 col-md-4 col-lg-3 item"><a href="building.jpg" data-lightbox="photos"><img src="~/datas/4.jpg" class="img-fluid" /></a></div>
+            </div>
+        </div>
+    </div>
+</body>

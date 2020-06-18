@@ -34,12 +34,12 @@ go
 
 insert into [Event]([Date],[Name],FK_Location,FK_Artist)
 values
-('2020-10-10','Event génial',1,1),
-('2020-2-20','Encore un event génial',2,2),
-('2020-10-20','Concert génial',1,2),
-('2020-10-21','Festival génial',3,3),
-('2022-1-20','Guinguette géniale',3,4),
-('2021-10-20','Event pas top',4,4)
+('2020-10-10 10:10','Event génial',1,1),
+('2020-2-20 10:10','Encore un event génial',2,2),
+('2020-10-20 10:10','Concert génial',1,2),
+('2020-10-21 10:10','Festival génial',3,3),
+('2022-1-20 10:10','Guinguette géniale',3,2),
+('2021-10-20 10:10','Event pas top',4,4)
 go
 
 insert into Country ([Name])

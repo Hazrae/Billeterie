@@ -17,7 +17,7 @@
             {
                 <div class="row">
                     <div class="col-md-3" style="border-bottom: 1px solid #822b2b;">@item.EventName</div>
-                    <div class="col-md-3" style="border-bottom: 1px solid #822b2b;">@item.EventDate.ToString("dd/MM/yyy")</div>
+                    <div class="col-md-3" style="border-bottom: 1px solid #822b2b;">@item.EventDate.ToString("dd/MM/yyy") @item.EventDate.ToString("hh"):@item.EventDate.ToString("mm")</div>
                     <div class="col-md-3" style="border-bottom: 1px solid #822b2b;">@item.LocationName</div>
                     <div class="col-md-3"><a class="btn btn-primary" href=@Url.Action("Booking","Event",new {id = item.EventID})>Booking</a></div>
 

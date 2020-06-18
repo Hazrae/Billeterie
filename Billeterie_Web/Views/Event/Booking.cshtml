@@ -28,7 +28,7 @@
 
                         <input type="hidden" asp-for="EventName" value="@Model.EventName" />
                         <div class="row" style=" margin: 1px;padding: 1px;">
-                            <div class="col-sm-11">@Model.EventDate.ToString("dd/MM/yy - HH/mm")</div>
+                            <div class="col-sm-11">@Model.EventDate.ToString("dd/MM/yyy") @Model.EventDate.ToString("hh"):@Model.EventDate.ToString("mm")</div>
                         </div>
 
                         <input type="hidden" asp-for="EventDate" value="@Model.EventDate" />
@@ -41,7 +41,7 @@
                     </div>
 
 
-                    <div class="col-md-6" text-align:center;">
+                    <div class="col-md-6">
                         @foreach (var item in Model.listTicket)
                         {
                             <div class="row">
@@ -56,7 +56,8 @@
                                 </div>
                             </div>
                             count++;
-                        }
+                            <br />
+                        }                        
                     </div>
                 </div>
                 <br />
